@@ -83,17 +83,24 @@ def generar_Datos_Movimiento():
     tiempo = inicio                                 # tiempo de inicio de la simulación
 
     while tiempo <= fin: 
-        probabilidad = 0.01                         # probabilidad base
+        probabilidad = 0.001                        # probabilidad base
 
         #Suponiendo que la persona suele salir entre las 8-8:30
         #y suele volver entre las 16-17:30
         #la probablidad de que haya movimientos entre esos rangos es muy baja
         #ya que la persona está fuera de casa
 
-        if (tiempo.hour == 8 and  0 <=tiempo.minute <= 30) :
+        #hora de levantarse
+        if (6 <= tiempo.hour <= 8 and  0 <=tiempo.minute <= 30) :
             probabilidad = 0.7                      # probabilidad alta cuando sale de casa
+        # hora de volver a casa 
         elif (tiempo.hour >= 16 ):                  # cuando está en casa 
             probabilidad = 0.65
+        
+        # Durmiendo zzz...
+        elif (tiempo.hour >= 23 
+              and tiempo.hour < 6):                   
+            probabilidad = 0.001
 
         hayMovimiento = random.random() < probabilidad
         if hayMovimiento : 
@@ -119,5 +126,5 @@ def escribir_csv(nombre_csv, datos, campos):
         escritor.writerows(datos)
         archivo.close()
 
-generar_datos_sensores()
-generar_Datos_Movimiento()
+#generar_datos_sensores()                            # generar los datos de los sensores de temperatura, gas, lluvia y luz    
+generar_Datos_Movimiento()                          # generar los datos del sensor de movimiento
