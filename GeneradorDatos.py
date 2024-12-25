@@ -1,130 +1,169 @@
-#librerías
+# Librerías
 import random
 from datetime import datetime, timedelta
 import csv
 
-def generar_datos_sensores(): 
+# Datos simulados de un mes
+INICIO = datetime(2024, 1, 1, 0, 0) 
+FIN = datetime(2024, 1, 31, 23, 59)
+
+def generar_datos_gas():
     """
-    Función para simular los datos de los sensores
+    Función que simula los datos del sensor de gas
     """
 
-    inicio = datetime(2024, 1, 1, 0, 0)             # fecha de inicio de la simulación
-    fin = datetime(2024, 1, 31, 23, 59)             # fecha de fin de la simulación
-    intervalo_temperatura = timedelta(minutes=20)   # intervalo de tiempo para el sensor de temperatura
-    intervalo_gas = timedelta(seconds=5)            # intervalo de tiempo para el sensor de gas 
-    intervalo_lluvia = timedelta(minutes=5)         # intervalo de tiempo para el sensor de lluvia
-    intervalo_luz = timedelta(minutes=10)           # intervalo de tiempo para el sensor de luz
+    intervalo_gas = timedelta(seconds=5)                # Intervalo de tiempo entre mediciones
 
-    #Arrays para guardar temporalmente los datos
     datos_gas = []
-    datos_lluvia = []
-    datos_luz = []
-    datos_temperatura = []
+    tiempo = INICIO                                     # Tiempo de inicio de la simulación          
 
-    tiempo = inicio                                 # tiempo de inicio de la simulación
-    # Datos del sensor de gas
-    while tiempo <= fin: 
+    while tiempo <= FIN:                                
+        probabilidad_gas = 0.0                          # Probabilidad base de que haya gas en el ambiente
+        if 6 <= tiempo.hour < 8:                        # preparación de desayuno
+            probabilidad_gas = 0.3                      
+        elif 8 <= tiempo.hour < 16:                     # Está fuera de casa
+            probabilidad_gas = 0.05
+        elif 16 <= tiempo.hour < 19:                    # posibilidad de estar cocinando
+            probabilidad_gas = 0.8
+        elif 19 <= tiempo.hour < 21:                    # preparación de cena
+            probabilidad_gas = 0.9
+        elif 21 <= tiempo.hour < 23:                    # calentar algo 
+            probabilidad_gas = 0.1
+        elif tiempo.hour <= 23 or tiempo.hour < 6:      # Durmiendo
+            probabilidad_gas = 0.0
+
+        hay_gas = random.random() < probabilidad_gas
         datos_gas.append({
-            "hayGas": random.choice([True, False]),
-            "sitio":"Casa/Salon", 
-            "fecha":tiempo
+            "hayGas": hay_gas,
+            "sitio": "Casa/Salon",
+            "fecha": tiempo
         })
         tiempo += intervalo_gas
 
-
-    tiempo = inicio                                 # reiniciar el tiempo
-    # Datos del sensor de lluvia 
-    while tiempo <= fin: 
-        datos_lluvia.append({
-            "hayLluvia": random.choice([True, False]),
-            "fecha":tiempo
-        })     
-        tiempo += intervalo_lluvia           
-
-    
-    tiempo = inicio                                 # reiniciar el tiempo
-    # Datos del sensor de luz 
-    while tiempo <= fin: 
-        datos_luz.append({
-            "hayLuz": random.choice([True, False]),
-            "fecha":tiempo
-        })     
-        tiempo += intervalo_luz
-    
-
-    tiempo = inicio                                 # reiniciar el tiempo
-    # Datos del sensor de temperatura
-    while tiempo <= fin: 
-        datos_temperatura.append({
-            "zona":"Casa/Salon",
-            "valor": round(
-                random
-                .uniform(15.0, 30.0), 1),           # Rango de temperatura
-            "fecha":tiempo
-        })     
-        tiempo += intervalo_temperatura
-    
-    # Escribir en los ficheros CSV los datos de los sensores
     escribir_csv("Gas.csv", datos_gas, ["hayGas", "sitio", "fecha"])
+
+def generar_datos_lluvia():
+    """
+    Función que simula los datos del sensor de lluvia
+    """
+
+    intervalo_lluvia = timedelta(minutes=5)               # Intervalo de tiempo entre mediciones
+
+    datos_lluvia = []
+    tiempo = INICIO
+    estado_lluvia = False
+    tiempo_proximo_cambio = tiempo + timedelta(minutes=random.randint(30, 480)) # Tiempo del cambio del estado de la lluvia
+
+    while tiempo <= FIN:
+        if tiempo >= tiempo_proximo_cambio:                 
+            estado_lluvia = not estado_lluvia               # Cambio del estado de la lluvia
+            duracion = random.randint(15, 120) if estado_lluvia else random.randint(30, 480)
+            tiempo_proximo_cambio = tiempo + timedelta(minutes=duracion)    # Tiempo del próximo cambio de estado
+
+        datos_lluvia.append({
+            "hayLluvia": estado_lluvia,
+            "fecha": tiempo
+        })
+        tiempo += intervalo_lluvia
+
     escribir_csv("Lluvia.csv", datos_lluvia, ["hayLluvia", "fecha"])
+
+def generar_datos_luz():
+    """
+    Función que simula los datos del sensor de luz
+    """
+
+    intervalo_luz = timedelta(minutes=10)
+
+    datos_luz = []
+    tiempo = INICIO
+
+    while tiempo <= FIN:
+        # dia de simulación que se irá cambiando
+        dia = tiempo.day    
+        salida_sol_inicio = datetime(2024, 1, dia, 8, 6)            # hora del comienzo de salida del sol
+        salida_sol = datetime(2024, 1, dia, 8, 36)                  # luz plena del sol
+        puesta_sol = datetime(2024, 1, dia, 17, 53)                 # hora del comienzdo de puesta del sol
+        puesta_sol_fin = datetime(2024, 1, dia, 18, 23)             # de noche
+
+        if salida_sol_inicio <= tiempo <= salida_sol:               # está saliendo el sol
+            hay_luz = True
+        elif puesta_sol <= tiempo <= puesta_sol_fin:                # está oscureciendo
+            hay_luz = False
+        elif salida_sol < tiempo <= puesta_sol:                     # luz plena del sol
+            hay_luz = True
+        else:                                                       # de noche         
+            hay_luz = False
+
+        datos_luz.append({
+            "hayLuz": hay_luz,
+            "fecha": tiempo
+        })
+        tiempo += intervalo_luz
+
     escribir_csv("Luz.csv", datos_luz, ["hayLuz", "fecha"])
+
+def generar_datos_temperatura():
+    """
+    Función que simula los datos del sensor de temperatura
+    """
+    
+    intervalo_temperatura = timedelta(minutes=20)
+
+    datos_temperatura = []
+    tiempo = INICIO
+
+    while tiempo <= FIN:
+        datos_temperatura.append({
+            "zona": "Casa/Salon",
+            "valor": round(random.uniform(15.0, 30.0), 1),
+            "fecha": tiempo
+        })
+        tiempo += intervalo_temperatura
+
     escribir_csv("Temperatura.csv", datos_temperatura, ["zona", "valor", "fecha"])
 
-def generar_Datos_Movimiento():
+def generar_datos_movimiento():
     """
     Función que simula los datos del sensor de movimiento
     """
 
-    datos_movimiento = []                           # Array para guardar los datos del sensor de movimiento   
-    inicio = datetime(2024, 1, 1, 0, 0)             # fecha de inicio de la simulación  
-    fin = datetime(2024, 1, 31, 23, 59)             # fecha de fin de la simulación 
-    intervalo_movimiento = timedelta(seconds=5)     # intervalo de tiempo para el sensor de movimiento    
+    intervalo_movimiento = timedelta(seconds=5)
 
-    tiempo = inicio                                 # tiempo de inicio de la simulación
+    datos_movimiento = []
+    tiempo = INICIO
 
-    while tiempo <= fin: 
-        probabilidad = 0.001                        # probabilidad base
+    while tiempo <= FIN:
+        probabilidad = 0.001                                    # Probabilidad base de que haya movimiento
 
-        #Suponiendo que la persona suele salir entre las 8-8:30
-        #y suele volver entre las 16-17:30
-        #la probablidad de que haya movimientos entre esos rangos es muy baja
-        #ya que la persona está fuera de casa
-
-        #hora de levantarse
-        if (6 <= tiempo.hour <= 8 and  0 <=tiempo.minute <= 30) :
-            probabilidad = 0.7                      # probabilidad alta cuando sale de casa
-        # hora de volver a casa 
-        elif (tiempo.hour >= 16 ):                  # cuando está en casa 
+        if 6 <= tiempo.hour <= 8 and tiempo.minute <= 30:       # Despertar y preparación para salir de casa
+            probabilidad = 0.7  
+        elif tiempo.hour >= 16:                                 # De vuelta a casa
             probabilidad = 0.65
-        
-        # Durmiendo zzz...
-        elif (tiempo.hour >= 23 
-              and tiempo.hour < 6):                   
+        elif tiempo.hour >= 23 or tiempo.hour < 6:              # Durmiendo 
             probabilidad = 0.001
 
-        hayMovimiento = random.random() < probabilidad
-        if hayMovimiento : 
+        hay_movimiento = random.random() < probabilidad
+        if hay_movimiento:
             datos_movimiento.append({
                 "zona": "Casa/Salon",
-                "hayMovimiento": hayMovimiento,
+                "hayMovimiento": hay_movimiento,
                 "fecha": tiempo
             })
         tiempo += intervalo_movimiento
 
-    # Escribir en el fichero CSV los datos del sensor de movimiento
     escribir_csv("Movimiento.csv", datos_movimiento, ["zona", "hayMovimiento", "fecha"])
 
 def escribir_csv(nombre_csv, datos, campos):
-    """ 
-    Función que escribe en un 
-    archivo csv los datos de los sensores
     """
-
+    Función que escribe en un archivo CSV los datos de los sensores
+    """
     with open(nombre_csv, mode="w", newline="", encoding="utf-8") as archivo:
         escritor = csv.DictWriter(archivo, fieldnames=campos)
         escritor.writeheader()
         escritor.writerows(datos)
-        archivo.close()
 
-#generar_datos_sensores()                            # generar los datos de los sensores de temperatura, gas, lluvia y luz    
-generar_Datos_Movimiento()                          # generar los datos del sensor de movimiento
+# Generar los datos de cada sensor
+generar_datos_gas()
+generar_datos_lluvia()
+generar_datos_luz()
