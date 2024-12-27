@@ -1,4 +1,5 @@
 # Librerías
+import os
 import random
 from datetime import datetime, timedelta
 import csv
@@ -34,7 +35,7 @@ def generar_datos_gas():
 
         hay_gas = random.random() < probabilidad_gas
         datos_gas.append({
-            "hayGas": hay_gas,
+            "hayGas": int(hay_gas),
             "sitio": "Casa/Salon",
             "fecha": tiempo
         })
@@ -61,7 +62,7 @@ def generar_datos_lluvia():
             tiempo_proximo_cambio = tiempo + timedelta(minutes=duracion)    # Tiempo del próximo cambio de estado
 
         datos_lluvia.append({
-            "hayLluvia": estado_lluvia,
+            "hayLluvia": int(estado_lluvia),
             "fecha": tiempo
         })
         tiempo += intervalo_lluvia
@@ -96,7 +97,7 @@ def generar_datos_luz():
             hay_luz = False
 
         datos_luz.append({
-            "hayLuz": hay_luz,
+            "hayLuz": int(hay_luz),
             "fecha": tiempo
         })
         tiempo += intervalo_luz
@@ -138,16 +139,16 @@ def generar_datos_movimiento():
 
         if 6 <= tiempo.hour <= 8 and tiempo.minute <= 30:       # Despertar y preparación para salir de casa
             probabilidad = 0.7  
-        elif tiempo.hour >= 16:                                 # De vuelta a casa
+        elif tiempo.hour >= 16 and tiempo.hour <= 23:           # De vuelta a casa
             probabilidad = 0.65
         elif tiempo.hour >= 23 or tiempo.hour < 6:              # Durmiendo 
-            probabilidad = 0.001
+            probabilidad = 0.0005
 
         hay_movimiento = random.random() < probabilidad
         if hay_movimiento:
             datos_movimiento.append({
                 "zona": "Casa/Salon",
-                "hayMovimiento": hay_movimiento,
+                "hayMovimiento": int(hay_movimiento),
                 "fecha": tiempo
             })
         tiempo += intervalo_movimiento
@@ -158,12 +159,11 @@ def escribir_csv(nombre_csv, datos, campos):
     """
     Función que escribe en un archivo CSV los datos de los sensores
     """
-    with open(nombre_csv, mode="w", newline="", encoding="utf-8") as archivo:
+    with open(os.path.join(os.path.dirname(__file__), nombre_csv), mode="w", newline="", encoding="utf-8") as archivo:
         escritor = csv.DictWriter(archivo, fieldnames=campos)
         escritor.writeheader()
         escritor.writerows(datos)
 
-# Generar los datos de cada sensor
-generar_datos_gas()
-generar_datos_lluvia()
-generar_datos_luz()
+# Generar los datos de cada sensors
+generar_datos_movimiento()
+
