@@ -91,11 +91,14 @@ public class ConectionDDBB {
         return ps;
     }
 
-    public static PreparedStatement GetDataBD(Connection con) {
-        return getStatement(con, "SELECT * FROM UBICOMP.MEASUREMENT");
+    public static PreparedStatement GetDataBD(Connection con, String table) {
+        return getStatement(con, "SELECT * FROM ubicuabd." + table);
     }
 
-    public static PreparedStatement SetDataBD(Connection con) {
-        return getStatement(con, "INSERT INTO UBICOMP.MEASUREMENT VALUES (?,?)");
+    public static PreparedStatement SetDataBD(Connection con, String table) {
+        // Obtener la fecha y hora actual
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
+        return getStatement(con, "INSERT INTO ubicua.MEASUREMENT VALUES (?,?)");
     }
 }
