@@ -7,7 +7,7 @@ public class MQTTBroker {
     private static final String clientId = "WheatherStationUAH";
     private static final String username = "ubicua";
     private static final String password = "ubicua";
-    
+
     public MQTTBroker() {
     }
 
@@ -30,5 +30,5 @@ public class MQTTBroker {
     public static String getPassword() {
         return password;
     }
-    
+
 }
