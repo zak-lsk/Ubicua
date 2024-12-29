@@ -99,6 +99,10 @@ public class ConectionDDBB {
         // Obtener la fecha y hora actual
         Calendar calendar = Calendar.getInstance();
         java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
-        return getStatement(con, "INSERT INTO ubicua.MEASUREMENT VALUES (?,?)");
+        return getStatement(con, "INSERT INTO ubicuabd." + table + " VALUES (?,?)");
+    }
+
+    public static PreparedStatement SetDataBD(Connection con, String table, String zone) {
+        return getStatement(con, "INSERT INTO ubicuabd." + table + " VALUES (?,?,?)");
     }
 }

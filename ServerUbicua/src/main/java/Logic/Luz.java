@@ -11,12 +11,12 @@ public class Luz {
         this.fecha = null;
     }
 
-    public boolean getHayLuz() {
-        return hayLuz == 1;
+    public int getHayLuz() {
+        return hayLuz;
     }
 
-    public void setHayLuz(boolean hayLuz) {
-        this.hayLuz = hayLuz ? 1 : 0;
+    public void setHayLuz(int hayLuz) {
+        this.hayLuz = hayLuz;
     }   
 
     public Timestamp getFecha() {

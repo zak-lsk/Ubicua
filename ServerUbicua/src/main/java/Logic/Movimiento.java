@@ -13,12 +13,12 @@ public class Movimiento {
         this.zona = null;
     }
 
-    public boolean getHayMovimiento() {
-        return hayMovimiento == 1;
+    public int getHayMovimiento() {
+        return hayMovimiento ;
     }
 
-    public void setHayMovimiento(boolean hayMovimiento) {
-        this.hayMovimiento = hayMovimiento ? 1 : 0;
+    public void setHayMovimiento(int hayMovimiento) {
+        this.hayMovimiento = hayMovimiento ;
     }
 
     public Timestamp getFecha() {

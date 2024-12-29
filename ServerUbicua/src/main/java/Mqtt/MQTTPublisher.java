@@ -31,6 +31,7 @@ public class MQTTPublisher {
             sampleClient.publish(topic, message);
             Log.logmqtt.info("Message published");
             sampleClient.disconnect();
+            sampleClient.close();
             Log.logmqtt.info("Disconnected");
 
         } catch (MqttException me) {

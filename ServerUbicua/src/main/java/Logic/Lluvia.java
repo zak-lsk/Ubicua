@@ -12,12 +12,12 @@ public class Lluvia {
         this.fecha = null;
     }
 
-    public boolean getHayLluvia() {
-        return hayLluvia == 1;
+    public int getHayLluvia() {
+        return hayLluvia;
     }
 
-    public void setHayLluvia(boolean hayLluvia) {
-        this.hayLluvia = hayLluvia ? 1 : 0;
+    public void setHayLluvia(int hayLluvia) {
+        this.hayLluvia = hayLluvia;
     }
 
     public Timestamp getFecha() {

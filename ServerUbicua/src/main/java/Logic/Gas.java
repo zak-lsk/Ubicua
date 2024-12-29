@@ -14,12 +14,12 @@ public class Gas {
         this.zona = null;
     }
 
-    public boolean getHayGas() {
-        return hayGas == 1;
+    public int getHayGas() {
+        return hayGas;
     }
 
-    public void setHayGas(boolean hayGas) {
-        this.hayGas = hayGas ? 1 : 0;
+    public void setHayGas(int hayGas) {
+        this.hayGas = hayGas;
     }
 
     public Timestamp getFecha() {
