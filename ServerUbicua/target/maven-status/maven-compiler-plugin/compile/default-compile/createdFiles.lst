@@ -2,10 +2,15 @@ Servlets\SetData.class
 Logic\Log.class
 Database\ConectionDDBB.class
 db\ConnectionDB.class
+Logic\Temperatura.class
 Mqtt\MQTTBroker.class
+Logic\Lluvia.class
+Logic\Luz.class
 db\Topics.class
+Logic\Gas.class
 Logic\Projectinitializer.class
 Logic\Logic.class
+Logic\Movimiento.class
 Servlets\GetData.class
 Logic\Measurement.class
 Mqtt\MQTTPublisher.class

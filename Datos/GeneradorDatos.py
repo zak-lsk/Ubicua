@@ -35,13 +35,13 @@ def generar_datos_gas():
 
         hay_gas = random.random() < probabilidad_gas
         datos_gas.append({
+            "zona": "Casa/Salon",
             "hayGas": int(hay_gas),
-            "sitio": "Casa/Salon",
             "fecha": tiempo
         })
         tiempo += intervalo_gas
 
-    escribir_csv("Gas.csv", datos_gas, ["hayGas", "sitio", "fecha"])
+    escribir_csv("Gas.csv", datos_gas, ["zona", "hayGas", "fecha"])
 
 def generar_datos_lluvia():
     """
@@ -165,5 +165,5 @@ def escribir_csv(nombre_csv, datos, campos):
         escritor.writerows(datos)
 
 # Generar los datos de cada sensors
-generar_datos_movimiento()
+generar_datos_gas()
 

@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import Logic.Log;
 import Logic.Logic;
 import Logic.Measurement;
+import Logic.Temperatura;
 
 /**
  * Servlet implementation class GetData
@@ -40,10 +41,10 @@ public class GetData extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            //ArrayList<Measurement> values =Logic.getDataFromDB();
-            //String jsonMeasurements = new Gson().toJson(values);
-            //Logs.log.info("Values=>" + jsonMeasurements);
-            //out.println(jsonMeasurements);
+            ArrayList<Temperatura> values =Logic.getDataTemperatura("Temperatura");
+            String jsonMeasurements = new Gson().toJson(values);
+            Log.log.info("Values=>" + jsonMeasurements);
+            out.println(jsonMeasurements);
         } catch (NumberFormatException nfe) {
             out.println("-1");
             Log.log.error("Number Format Exception: " + nfe);

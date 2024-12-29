@@ -16,8 +16,9 @@ public class MQTTSuscriber implements MqttCallback {
     public void suscribeTopic(MQTTBroker broker, String topic) {
         Log.logmqtt.debug("Suscribe to topics");
         MemoryPersistence persistence = new MemoryPersistence();
+        MqttClient sampleClient = null;     
         try {
-            MqttClient sampleClient = new MqttClient(MQTTBroker.getBroker(), MQTTBroker.getClientId(), persistence);
+            sampleClient = new MqttClient(MQTTBroker.getBroker(), MQTTBroker.getClientId(), persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setUserName(MQTTBroker.getUsername());
             connOpts.setPassword(MQTTBroker.getPassword().toCharArray());
@@ -34,6 +35,14 @@ public class MQTTSuscriber implements MqttCallback {
             Log.logmqtt.error("Error suscribing topic: {}", me);
         } catch (Exception e) {
             Log.logmqtt.error("Error suscribing topic: {}", e);
+        } finally {
+            if (sampleClient != null && sampleClient.isConnected()) {
+                try {
+                    sampleClient.disconnect();
+                } catch (MqttException e) {
+                    Log.logmqtt.error("Error disconnecting: {}", e);
+                }
+            }
         }
     }
 
@@ -46,6 +55,7 @@ public class MQTTSuscriber implements MqttCallback {
         Log.logmqtt.info("{}: {}", topic, message.toString());
         Topics newTopic = new Topics();
         newTopic.setValue(message.toString());
+        newTopic.setIdTopic(topic);
     }
 
     @Override

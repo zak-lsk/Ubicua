@@ -39,8 +39,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Temperatura>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -66,8 +67,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Temperatura>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -96,8 +98,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Lluvia>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -122,8 +125,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Lluvia>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -154,8 +158,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Luz>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -180,8 +185,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Luz>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -212,8 +218,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Movimiento>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -240,8 +247,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Movimiento>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -260,7 +268,7 @@ public class Logic {
             while (rs.next()) {
                 Gas measure = new Gas();
                 measure.setZona(rs.getString("zona"));
-                measure.setHayGas(rs.getInt("valor"));
+                measure.setHayGas(rs.getInt("hayGas"));
                 measure.setFecha(rs.getTimestamp("fecha"));
                 values.add(measure);
             }
@@ -273,8 +281,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Gas>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
@@ -300,8 +309,9 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<Gas>();
+        } finally{
+            conector.closeConnection(con);
         }
-        conector.closeConnection(con);
         return values;
     }
 
