@@ -16,11 +16,11 @@
 
     <servlet>
         <servlet-name>SisdogarControlador</servlet-name>
-        <servlet-class>com.mycompany.duro.servlets.SisdogarControlador</servlet-class>
+        <servlet-class>servlets.SisdogarControlador</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>SisdogarControlador</servlet-name>
-        <url-pattern>/controlador</url-pattern>
+        <url-pattern>/SisdogarControlador</url-pattern>
     </servlet-mapping>
 </web-app>

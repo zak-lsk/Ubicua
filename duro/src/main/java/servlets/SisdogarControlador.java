@@ -1,4 +1,4 @@
-package com.mycompany.duro.servlets;
+package servlets;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
