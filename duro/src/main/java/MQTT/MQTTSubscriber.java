@@ -13,30 +13,39 @@ import Logic.*;
 
 public class MQTTSubscriber implements MqttCallback {
 
+    private static MqttClient sampleClient;
+
     public void suscribeTopic(MQTTBroker broker, String topic) {
         Log.logmqtt.debug("Suscribe to topics");
         MemoryPersistence persistence = new MemoryPersistence();
-        MqttClient sampleClient = null;
+
         try {
-            sampleClient = new MqttClient(MQTTBroker.getBroker(), MQTTBroker.getClientId(), persistence);
+            // Crear un ID único para el subscriber
+            String clientId = MQTTBroker.getClientId() + "_sub_" + System.currentTimeMillis();
+
+            sampleClient = new MqttClient(MQTTBroker.getBroker(), clientId, persistence);
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setUserName(MQTTBroker.getUsername());
             connOpts.setPassword(MQTTBroker.getPassword().toCharArray());
             connOpts.setCleanSession(false);
-            connOpts.setKeepAliveInterval(60);
-            connOpts.setConnectionTimeout(30);
+            connOpts.setKeepAliveInterval(120);
+            connOpts.setConnectionTimeout(60);
+            connOpts.setAutomaticReconnect(true);  // Añadir reconexión automática
+
+            // Establecer el callback antes de conectar
+            sampleClient.setCallback(this);
+
             Log.logmqtt.debug("Mqtt Connecting to broker: " + MQTTBroker.getBroker());
             sampleClient.connect(connOpts);
             Log.logmqtt.debug("Mqtt Connected");
-            sampleClient.setCallback(this);
 
             sampleClient.subscribe(topic, 2);
             Log.logmqtt.info("Subscribed to {}", topic);
+
         } catch (MqttException me) {
             Log.logmqtt.error("Error suscribing topic: {}", me);
         } catch (Exception e) {
             Log.logmqtt.error("Error suscribing topic: {}", e);
-
         }
     }
 
@@ -55,12 +64,12 @@ public class MQTTSubscriber implements MqttCallback {
         try {
             String playload = message.toString();               //sacar contenido del mensaje 
             String[] topicParts = topic.split("/");        //dividir el topic en partes
-            if (topicParts.length < 3) {                         //todos los topics están hechos para tener 3 secciones
+            if (topicParts.length < 2) {                         //todos los topics están hechos para tener 3 secciones
                 Log.logmqtt.error("Formato del topic no válido");
                 return;
             }
-            String zona = topicParts[1];
-            String sensor = topicParts[2];
+//            String zona = topicParts[1];
+//                String sensor = topicParts[2];
             
             System.out.println("Mensaje recibido del topic " + topic + playload);
             //switch (sensor) {

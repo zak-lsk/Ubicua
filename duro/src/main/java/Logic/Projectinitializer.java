@@ -7,6 +7,8 @@ import jakarta.servlet.annotation.WebListener;
 import MQTT.MQTTBroker;
 import MQTT.MQTTPublisher;
 import MQTT.MQTTSubscriber;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @WebListener
 public class Projectinitializer implements ServletContextListener {
@@ -30,5 +32,11 @@ public class Projectinitializer implements ServletContextListener {
         MQTTSubscriber suscriber = new MQTTSubscriber();
         suscriber.suscribeTopic(broker, "Casa/#");
         MQTTPublisher.publish(broker, "Casa/Test", "Hello from Tomcat :)");
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            System.out.println(ex);
+        }
+        MQTTPublisher.publish(broker, "Casa/Test", "Hola de nuevo (5segundos después)");
     }
 }
