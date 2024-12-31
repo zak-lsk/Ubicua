@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SISDOGAR - Temperatura</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
-  <div class="ventana">
-    <h2>Temperatura</h2>
-    <div class="contenido">
-      <p>Actual: <span id="tempValue">--°C</span></p>
-      <button onclick="enviarAccion('temperatura', 'encender')">Encender</button>
-      <button onclick="enviarAccion('temperatura', 'apagar')">Apagar</button>
-      <button onclick="location.href='index.html'">Volver</button>
-    </div>
-  </div>
-  <script src="js/app.js"></script>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SISDOGAR - Temperatura</title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="ventana">
+            <h2>Temperatura</h2>
+            <div class="contenido">
+                <p>Actual: <span id="tempValue">--°C</span></p>
+                <button onclick="enviarAccion('temperatura', 'encender')">Encender</button>
+                <button onclick="enviarAccion('temperatura', 'apagar')">Apagar</button>
+                <button onclick="location.href = 'index.html'">Volver</button>
+            </div>
+        </div>
+        <script>
+            function actualizarTemperatura() {
+                fetch('temperatura')
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('tempValue').textContent = data.temperatura + '°C';
+                        })
+                        .catch(error => console.error('Error:', error));
+            }
+
+            // Actualizar cada 5 segundos
+            setInterval(actualizarTemperatura, 5000);
+
+            // Primera actualización inmediata
+            actualizarTemperatura();
+        </script>
+        <script src="js/app.js"></script>
+    </body>
 </html>

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package db;
 
 import java.sql.Connection;
@@ -26,7 +23,7 @@ public class ConectionDDBB {
             try {
                 Context ctx = new InitialContext();
                 // Get the connection factory configured in Tomcat
-                DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/ubicomp");
+                DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/ubicuabd");
 
                 // Obtiene una conexion
                 con = ds.getConnection();

@@ -11,6 +11,65 @@ import java.sql.ResultSet;
 
 public class Logic {
 
+    public static ArrayList<Temperatura> getDataPrueba(String table) {
+        ArrayList<Temperatura> values = new ArrayList<>();
+
+        ConectionDDBB conector = new ConectionDDBB();
+        Connection con = null;
+        try {
+            con = conector.obtainConnection(true);
+            Log.log.info("Database Connected");
+
+            PreparedStatement ps = ConectionDDBB.GetDataBD(con, table);
+            Log.log.info("Query=>" + ps.toString());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Temperatura measure = new Temperatura();
+                measure.setZona(rs.getString("zona"));
+                measure.setValor(rs.getFloat("valor"));
+                measure.setFecha(rs.getTimestamp("fecha"));
+                values.add(measure);
+            }
+        } catch (SQLException | NullPointerException e) {
+            Log.log.error("Error: " + e);
+            values = new ArrayList<>();
+        } catch (Exception e) {
+            Log.log.error("Error:" + e);
+            values = new ArrayList<>();
+        } finally {
+            conector.closeConnection(con);
+        }
+        return values;
+    }
+    
+        public static ArrayList<Temperatura> setDataPrueba(String table, float value, String zone) {
+        ArrayList<Temperatura> values = new ArrayList<>();
+        ConectionDDBB conector = new ConectionDDBB();
+        Connection con = null;
+        try {
+            con = conector.obtainConnection(true);
+            Log.log.info("Database Connected");
+            PreparedStatement ps = ConectionDDBB.SetDataBD(con, table, zone);
+            ps.setString(1, zone);
+            ps.setFloat(2, value);
+            ps.setTimestamp(3, new Timestamp((new Date()).getTime()));
+            Log.log.info("Query=>" + ps.toString());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            Log.log.error("Error: " + e);
+            values = new ArrayList<>();
+        } catch (NullPointerException e) {
+            Log.log.error("Error: " + e);
+            values = new ArrayList<>();
+        } catch (Exception e) {
+            Log.log.error("Error:" + e);
+            values = new ArrayList<>();
+        } finally {
+            conector.closeConnection(con);
+        }
+        return values;
+    }
+
     public static ArrayList<Temperatura> getDataTemperatura(String table) {
         ArrayList<Temperatura> values = new ArrayList<>();
 
@@ -36,7 +95,7 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
@@ -64,7 +123,7 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
@@ -95,7 +154,7 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
@@ -122,12 +181,11 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
     }
-
 
     public static ArrayList<Luz> getDataLuz(String table) {
         ArrayList<Luz> values = new ArrayList<>();
@@ -155,7 +213,7 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
@@ -182,7 +240,7 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
@@ -215,12 +273,11 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
     }
-
 
     public static ArrayList<Movimiento> setDataMovimiento(String table, int value, String zone) {
         ArrayList<Movimiento> values = new ArrayList<>();
@@ -229,7 +286,7 @@ public class Logic {
         try {
             con = conector.obtainConnection(true);
             Log.log.info("Database Connected");
-            PreparedStatement ps = ConectionDDBB.SetDataBD(con, table);
+            PreparedStatement ps = ConectionDDBB.SetDataBD(con, table, zone);
             ps.setString(1, zone);
             ps.setInt(2, value);
             ps.setTimestamp(3, new Timestamp((new Date()).getTime()));
@@ -244,14 +301,13 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
     }
 
-    
-    public static ArrayList<Gas> getDataGas(String table){
+    public static ArrayList<Gas> getDataGas(String table) {
         ArrayList<Gas> values = new ArrayList<>();
         ConectionDDBB conector = new ConectionDDBB();
         Connection con = null;
@@ -278,20 +334,20 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
     }
 
-    public static ArrayList<Gas> setDataGas(String table, int value, String zone){
+    public static ArrayList<Gas> setDataGas(String table, int value, String zone) {
         ArrayList<Gas> values = new ArrayList<>();
         ConectionDDBB conector = new ConectionDDBB();
         Connection con = null;
         try {
             con = conector.obtainConnection(true);
             Log.log.info("Database Connected");
-            PreparedStatement ps = ConectionDDBB.SetDataBD(con, table);
+            PreparedStatement ps = ConectionDDBB.SetDataBD(con, table, zone);
             ps.setString(1, zone);
             ps.setInt(2, value);
             ps.setTimestamp(3, new Timestamp((new Date()).getTime()));
@@ -306,13 +362,10 @@ public class Logic {
         } catch (Exception e) {
             Log.log.error("Error:" + e);
             values = new ArrayList<>();
-        } finally{
+        } finally {
             conector.closeConnection(con);
         }
         return values;
     }
 
-    
-
 }
-

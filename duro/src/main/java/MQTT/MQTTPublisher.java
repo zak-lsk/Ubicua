@@ -21,23 +21,22 @@ public class MQTTPublisher {
         MemoryPersistence persistence = new MemoryPersistence();
         try {
             MqttClient sampleClient = new MqttClient(MQTTBroker.getBroker(), MQTTBroker.getClientId(), persistence);
-                MqttConnectOptions connOpts = new MqttConnectOptions();
-                connOpts.setUserName(MQTTBroker.getUsername());
-                connOpts.setPassword(MQTTBroker.getPassword().toCharArray());
-                connOpts.setCleanSession(false);
-                connOpts.setKeepAliveInterval(120);
-                connOpts.setConnectionTimeout(60);
-                connOpts.setAutomaticReconnect(true);  // Añadir reconexión automática
+            MqttConnectOptions connOpts = new MqttConnectOptions();
+            connOpts.setUserName(MQTTBroker.getUsername());
+            connOpts.setPassword(MQTTBroker.getPassword().toCharArray());
+            connOpts.setCleanSession(false);
+            connOpts.setKeepAliveInterval(120);
+            connOpts.setConnectionTimeout(60);
+            connOpts.setAutomaticReconnect(true);  // Añadir reconexión automática
 
-                Log.logmqtt.info("Connecting to broker: " + MQTTBroker.getBroker());
-                sampleClient.connect(connOpts);
-                Log.logmqtt.info("Connected");
+            Log.logmqtt.info("Connecting to broker: " + MQTTBroker.getBroker());
+            sampleClient.connect(connOpts);
+            Log.logmqtt.info("Connected");
             MqttMessage message = new MqttMessage(content.getBytes());
             message.setQos(MQTTBroker.getQos());
             sampleClient.publish(topic, message);
             Log.logmqtt.info("Message published");
 
-           
             sampleClient.disconnect();
             Log.logmqtt.info("Disconnected");
         } catch (MqttException me) {

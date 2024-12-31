@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
-   version="6.0">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
     <session-config>
         <session-timeout>
             30
@@ -13,7 +13,12 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-
+    <resource-ref>
+        <description>Base de datos UbiCuaBD</description>
+        <res-ref-name>jdbc/ubicuabd</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
     <servlet>
         <servlet-name>SisdogarControlador</servlet-name>
         <servlet-class>servlets.SisdogarControlador</servlet-class>
@@ -22,5 +27,45 @@
     <servlet-mapping>
         <servlet-name>SisdogarControlador</servlet-name>
         <url-pattern>/SisdogarControlador</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>TemperaturaServlet</servlet-name>
+        <servlet-class>servlets.TemperaturaServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TemperaturaServlet</servlet-name>
+        <url-pattern>/TemperaturaServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>VentanaServlet</servlet-name>
+        <servlet-class>servlets.VentanaServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>VentanaServlet</servlet-name>
+        <url-pattern>/VentanaServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ParaguasServlet</servlet-name>
+        <servlet-class>servlets.ParaguasServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ParaguasServlet</servlet-name>
+        <url-pattern>/ParaguasServlet</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AlarmaServlet</servlet-name>
+        <servlet-class>servlets.AlarmaServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AlarmaServlet</servlet-name>
+        <url-pattern>/AlarmaServlet</url-pattern>
     </servlet-mapping>
 </web-app>
