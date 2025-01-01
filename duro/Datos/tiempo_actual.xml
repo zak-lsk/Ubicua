@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<current>
+    <city id="3130616" name="Alcalá de Henares">
+        <coord lat="40.4821" lon="-3.36"/>
+        <country>ES</country>
+        <timezone>3600</timezone>
+        <sun rise="2025-01-01T07:36:44" set="2025-01-01T16:57:03"/>
+    </city>
+    <temperature max="7.34" min="3.82" unit="celsius" value="4.35"/>
+    <feels_like unit="celsius" value="3.15"/>
+    <humidity unit="%" value="80"/>
+    <pressure unit="hPa" value="1030"/>
+    <wind>
+        <speed name="Calm" unit="m/s" value="1.54"/>
+        <gusts/>
+        <direction code="N" name="North" value="350"/>
+    </wind>
+    <clouds name="clear sky" value="0"/>
+    <visibility value="10000"/>
+    <precipitation mode="no"/>
+    <weather icon="01n" number="800" value="cielo claro"/>
+    <lastupdate value="2025-01-01T19:35:18"/>
+</current>

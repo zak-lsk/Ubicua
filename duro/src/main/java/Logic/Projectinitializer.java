@@ -7,8 +7,6 @@ import jakarta.servlet.annotation.WebListener;
 import MQTT.MQTTBroker;
 import MQTT.MQTTPublisher;
 import MQTT.MQTTSubscriber;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebListener
 public class Projectinitializer implements ServletContextListener {

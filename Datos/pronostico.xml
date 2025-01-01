@@ -1,0 +1,110 @@
+<?xml version="1.0" ?>
+<weatherdata>
+    <location>
+        <name>Alcalá de Henares</name>
+        <type/>
+        <country>ES</country>
+        <timezone>3600</timezone>
+        <location altitude="0" latitude="40.4821" longitude="-3.36" geobase="geonames" geobaseid="3130616"/>
+    </location>
+    <credit/>
+    <meta>
+        <lastupdate/>
+        <calctime>0</calctime>
+        <nextupdate/>
+    </meta>
+    <sun rise="2025-01-01T07:36:44" set="2025-01-01T16:57:03"/>
+    <forecast>
+        <time day="2025-01-01">
+            <sun rise="2025-01-01T07:36:44" set="2025-01-01T16:57:03"/>
+            <symbol number="800" name="cielo claro" var="01d"/>
+            <precipitation probability="0"/>
+            <windDirection deg="51" code="NE" name="NorthEast"/>
+            <windSpeed mps="1.92" unit="m/s" name="Light breeze"/>
+            <windGust gust="1.9" unit="m/s"/>
+            <temperature day="8.23" min="2.17" max="9.56" night="4.7" eve="4.88" morn="2.54" unit="celsius"/>
+            <feels_like day="8.23" night="3.74" eve="4.88" morn="0.75" unit="celsius"/>
+            <pressure unit="hPa" value="1031"/>
+            <humidity value="51" unit="%"/>
+            <clouds value="clear sky" all="2" unit="%"/>
+        </time>
+        <time day="2025-01-02">
+            <sun rise="2025-01-02T07:36:49" set="2025-01-02T16:57:53"/>
+            <symbol number="800" name="cielo claro" var="01d"/>
+            <precipitation probability="0"/>
+            <windDirection deg="240" code="WSW" name="West-southwest"/>
+            <windSpeed mps="2.97" unit="m/s" name="Light breeze"/>
+            <windGust gust="3.84" unit="m/s"/>
+            <temperature day="8.21" min="1.97" max="9.8" night="4.49" eve="6.39" morn="2.08" unit="celsius"/>
+            <feels_like day="6.99" night="2.89" eve="4.71" morn="2.08" unit="celsius"/>
+            <pressure unit="hPa" value="1029"/>
+            <humidity value="64" unit="%"/>
+            <clouds value="few clouds" all="10" unit="%"/>
+        </time>
+        <time day="2025-01-03">
+            <sun rise="2025-01-03T07:36:52" set="2025-01-03T16:58:44"/>
+            <symbol number="804" name="nubes" var="04d"/>
+            <precipitation probability="0"/>
+            <windDirection deg="238" code="WSW" name="West-southwest"/>
+            <windSpeed mps="2.24" unit="m/s" name="Light breeze"/>
+            <windGust gust="2.8" unit="m/s"/>
+            <temperature day="7.86" min="2.35" max="9.01" night="5.92" eve="7.6" morn="2.59" unit="celsius"/>
+            <feels_like day="6.65" night="4.76" eve="6.87" morn="2.59" unit="celsius"/>
+            <pressure unit="hPa" value="1027"/>
+            <humidity value="61" unit="%"/>
+            <clouds value="overcast clouds" all="97" unit="%"/>
+        </time>
+        <time day="2025-01-04">
+            <sun rise="2025-01-04T07:36:52" set="2025-01-04T16:59:37"/>
+            <symbol number="802" name="nubes dispersas" var="03d"/>
+            <precipitation probability="0"/>
+            <windDirection deg="238" code="WSW" name="West-southwest"/>
+            <windSpeed mps="4.57" unit="m/s" name="Gentle Breeze"/>
+            <windGust gust="6.37" unit="m/s"/>
+            <temperature day="9.01" min="3.23" max="10.95" night="6.03" eve="7.23" morn="3.41" unit="celsius"/>
+            <feels_like day="7.72" night="4.48" eve="5.41" morn="2.29" unit="celsius"/>
+            <pressure unit="hPa" value="1025"/>
+            <humidity value="67" unit="%"/>
+            <clouds value="scattered clouds" all="36" unit="%"/>
+        </time>
+        <time day="2025-01-05">
+            <sun rise="2025-01-05T07:36:51" set="2025-01-05T17:00:31"/>
+            <symbol number="500" name="lluvia ligera" var="10d"/>
+            <precipitation probability="1" value="1.58" type="rain"/>
+            <windDirection deg="195" code="SSW" name="South-southwest"/>
+            <windSpeed mps="9.02" unit="m/s" name="Fresh Breeze"/>
+            <windGust gust="14.57" unit="m/s"/>
+            <temperature day="9.4" min="3.96" max="11.59" night="9.69" eve="9.63" morn="3.96" unit="celsius"/>
+            <feels_like day="6.57" night="6.02" eve="7.34" morn="2.26" unit="celsius"/>
+            <pressure unit="hPa" value="1015"/>
+            <humidity value="72" unit="%"/>
+            <clouds value="overcast clouds" all="100" unit="%"/>
+        </time>
+        <time day="2025-01-06">
+            <sun rise="2025-01-06T07:36:47" set="2025-01-06T17:01:27"/>
+            <symbol number="500" name="lluvia ligera" var="10d"/>
+            <precipitation probability="1" value="4.4" type="rain"/>
+            <windDirection deg="200" code="SSW" name="South-southwest"/>
+            <windSpeed mps="8.49" unit="m/s" name="Fresh Breeze"/>
+            <windGust gust="15" unit="m/s"/>
+            <temperature day="9.62" min="6.53" max="9.89" night="6.53" eve="6.91" morn="8.26" unit="celsius"/>
+            <feels_like day="6.27" night="2.91" eve="4.59" morn="4.84" unit="celsius"/>
+            <pressure unit="hPa" value="1006"/>
+            <humidity value="76" unit="%"/>
+            <clouds value="overcast clouds" all="98" unit="%"/>
+        </time>
+        <time day="2025-01-07">
+            <sun rise="2025-01-07T07:36:41" set="2025-01-07T17:02:24"/>
+            <symbol number="801" name="algo de nubes" var="02d"/>
+            <precipitation probability="0"/>
+            <windDirection deg="289" code="WNW" name="West-northwest"/>
+            <windSpeed mps="6.47" unit="m/s" name="Moderate breeze"/>
+            <windGust gust="10.89" unit="m/s"/>
+            <temperature day="7.66" min="3.24" max="8.41" night="4.39" eve="5.83" morn="3.24" unit="celsius"/>
+            <feels_like day="4.74" night="2.28" eve="2.21" morn="-0.47" unit="celsius"/>
+            <pressure unit="hPa" value="1019"/>
+            <humidity value="47" unit="%"/>
+            <clouds value="few clouds" all="12" unit="%"/>
+        </time>
+    </forecast>
+</weatherdata>

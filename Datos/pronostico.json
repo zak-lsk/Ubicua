@@ -1,0 +1,258 @@
+{
+    "city": {
+        "id": 3130616,
+        "name": "Alcalá de Henares",
+        "coord": {
+            "lon": -3.36,
+            "lat": 40.4821
+        },
+        "country": "ES",
+        "population": 204574,
+        "timezone": 3600
+    },
+    "cod": "200",
+    "message": 1.1645191,
+    "cnt": 7,
+    "list": [
+        {
+            "dt": 1735732800,
+            "sunrise": 1735717004,
+            "sunset": 1735750623,
+            "temp": {
+                "day": 8.23,
+                "min": 2.17,
+                "max": 9.56,
+                "night": 4.74,
+                "eve": 4.96,
+                "morn": 2.54
+            },
+            "feels_like": {
+                "day": 8.23,
+                "night": 3.79,
+                "eve": 4.96,
+                "morn": 0.75
+            },
+            "pressure": 1031,
+            "humidity": 51,
+            "weather": [
+                {
+                    "id": 800,
+                    "main": "Clear",
+                    "description": "cielo claro",
+                    "icon": "01d"
+                }
+            ],
+            "speed": 1.92,
+            "deg": 51,
+            "gust": 1.9,
+            "clouds": 2,
+            "pop": 0
+        },
+        {
+            "dt": 1735819200,
+            "sunrise": 1735803409,
+            "sunset": 1735837073,
+            "temp": {
+                "day": 8.21,
+                "min": 1.97,
+                "max": 9.8,
+                "night": 4.49,
+                "eve": 6.39,
+                "morn": 2.08
+            },
+            "feels_like": {
+                "day": 6.99,
+                "night": 2.89,
+                "eve": 4.71,
+                "morn": 2.08
+            },
+            "pressure": 1029,
+            "humidity": 64,
+            "weather": [
+                {
+                    "id": 800,
+                    "main": "Clear",
+                    "description": "cielo claro",
+                    "icon": "01d"
+                }
+            ],
+            "speed": 2.97,
+            "deg": 240,
+            "gust": 3.84,
+            "clouds": 10,
+            "pop": 0
+        },
+        {
+            "dt": 1735905600,
+            "sunrise": 1735889812,
+            "sunset": 1735923524,
+            "temp": {
+                "day": 7.86,
+                "min": 2.35,
+                "max": 9.01,
+                "night": 5.92,
+                "eve": 7.6,
+                "morn": 2.59
+            },
+            "feels_like": {
+                "day": 6.65,
+                "night": 4.76,
+                "eve": 6.87,
+                "morn": 2.59
+            },
+            "pressure": 1027,
+            "humidity": 61,
+            "weather": [
+                {
+                    "id": 804,
+                    "main": "Clouds",
+                    "description": "nubes",
+                    "icon": "04d"
+                }
+            ],
+            "speed": 2.24,
+            "deg": 238,
+            "gust": 2.8,
+            "clouds": 97,
+            "pop": 0
+        },
+        {
+            "dt": 1735992000,
+            "sunrise": 1735976212,
+            "sunset": 1736009977,
+            "temp": {
+                "day": 9.01,
+                "min": 3.23,
+                "max": 10.95,
+                "night": 6.03,
+                "eve": 7.23,
+                "morn": 3.41
+            },
+            "feels_like": {
+                "day": 7.72,
+                "night": 4.48,
+                "eve": 5.41,
+                "morn": 2.29
+            },
+            "pressure": 1025,
+            "humidity": 67,
+            "weather": [
+                {
+                    "id": 802,
+                    "main": "Clouds",
+                    "description": "nubes dispersas",
+                    "icon": "03d"
+                }
+            ],
+            "speed": 4.57,
+            "deg": 238,
+            "gust": 6.37,
+            "clouds": 36,
+            "pop": 0
+        },
+        {
+            "dt": 1736078400,
+            "sunrise": 1736062611,
+            "sunset": 1736096431,
+            "temp": {
+                "day": 9.4,
+                "min": 3.96,
+                "max": 11.59,
+                "night": 9.69,
+                "eve": 9.63,
+                "morn": 3.96
+            },
+            "feels_like": {
+                "day": 6.57,
+                "night": 6.02,
+                "eve": 7.34,
+                "morn": 2.26
+            },
+            "pressure": 1015,
+            "humidity": 72,
+            "weather": [
+                {
+                    "id": 500,
+                    "main": "Rain",
+                    "description": "lluvia ligera",
+                    "icon": "10d"
+                }
+            ],
+            "speed": 9.02,
+            "deg": 195,
+            "gust": 14.57,
+            "clouds": 100,
+            "pop": 1,
+            "rain": 1.58
+        },
+        {
+            "dt": 1736164800,
+            "sunrise": 1736149007,
+            "sunset": 1736182887,
+            "temp": {
+                "day": 9.62,
+                "min": 6.53,
+                "max": 9.89,
+                "night": 6.53,
+                "eve": 6.91,
+                "morn": 8.26
+            },
+            "feels_like": {
+                "day": 6.27,
+                "night": 2.91,
+                "eve": 4.59,
+                "morn": 4.84
+            },
+            "pressure": 1006,
+            "humidity": 76,
+            "weather": [
+                {
+                    "id": 500,
+                    "main": "Rain",
+                    "description": "lluvia ligera",
+                    "icon": "10d"
+                }
+            ],
+            "speed": 8.49,
+            "deg": 200,
+            "gust": 15,
+            "clouds": 98,
+            "pop": 1,
+            "rain": 4.4
+        },
+        {
+            "dt": 1736251200,
+            "sunrise": 1736235401,
+            "sunset": 1736269344,
+            "temp": {
+                "day": 7.66,
+                "min": 3.24,
+                "max": 8.41,
+                "night": 4.39,
+                "eve": 5.83,
+                "morn": 3.24
+            },
+            "feels_like": {
+                "day": 4.74,
+                "night": 2.28,
+                "eve": 2.21,
+                "morn": -0.47
+            },
+            "pressure": 1019,
+            "humidity": 47,
+            "weather": [
+                {
+                    "id": 801,
+                    "main": "Clouds",
+                    "description": "algo de nubes",
+                    "icon": "02d"
+                }
+            ],
+            "speed": 6.47,
+            "deg": 289,
+            "gust": 10.89,
+            "clouds": 12,
+            "pop": 0
+        }
+    ]
+}

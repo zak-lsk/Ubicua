@@ -97,9 +97,6 @@ public class ConectionDDBB {
     }
 
     public static PreparedStatement SetDataBD(Connection con, String table) {
-        // Obtener la fecha y hora actual
-        Calendar calendar = Calendar.getInstance();
-        java.sql.Date date = new java.sql.Date(calendar.getTime().getTime());
         return getStatement(con, "INSERT INTO ubicuabd." + table + " VALUES (?,?)");
     }
 
