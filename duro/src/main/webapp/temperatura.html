@@ -29,11 +29,36 @@
                     .catch(error => console.error('Error:', error));
             }
 
-            // Actualizar cada 5 segundos
-            setInterval(actualizarTemperatura, 5000);
+            // Obtener pronóstico y mostrarlo en el HTML
+            function actualizarPronostico() {
+                fetch('PronosticoServlet')
+                    .then(response => response.json())
+                    .then(data => {
+                        const pronosticoDiv = document.getElementById('pronosticoData');
+                        pronosticoDiv.innerHTML = ''; // Limpiar contenido previo
 
-            // Primera actualización inmediata
+                        data.forEach((intervalo) => {
+                            const item = document.createElement('div');
+                            item.innerHTML = `
+                                <p>
+                                    <strong>${new Date(intervalo.fechaHora).toLocaleString('es-ES')}</strong>: 
+                                    ${intervalo.temperatura}°C - ${intervalo.descripcion}
+                                </p>`;
+                            pronosticoDiv.appendChild(item);
+                        });
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+
+            // Actualizar datos cada 5 segundos
+            setInterval(() => {
+                actualizarTemperatura();
+                actualizarPronostico();
+            }, 5000);
+
+            // Actualización inicial
             actualizarTemperatura();
+            actualizarPronostico();
         </script>
         <script src="js/app.js"></script>
     </body>

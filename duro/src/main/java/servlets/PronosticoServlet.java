@@ -2,6 +2,7 @@ package servlets;
 
 import Logic.Log;
 import Logic.WeatherAPI;
+import Logic.LocalDateTimeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -58,7 +59,12 @@ public class PronosticoServlet extends HttpServlet {
                     return;
                 }
                 
-                String jsonResponse = new Gson().toJson(pronosticos);
+                // Registrar el adaptador para LocalDateTime
+                Gson gson = new GsonBuilder()
+                        .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+                        .create();
+                
+                String jsonResponse = gson.toJson(pronosticos);
                 response.getWriter().write(jsonResponse);
                 Log.log.info("Pronóstico enviado correctamente");
                 
