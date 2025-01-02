@@ -13,98 +13,98 @@
         <calctime>0</calctime>
         <nextupdate/>
     </meta>
-    <sun rise="2025-01-01T07:36:44" set="2025-01-01T16:57:03"/>
+    <sun rise="2025-01-02T07:36:49" set="2025-01-02T16:57:53"/>
     <forecast>
-        <time day="2025-01-01">
-            <sun rise="2025-01-01T07:36:44" set="2025-01-01T16:57:03"/>
+        <time from="2025-01-02T09:00:00" to="2025-01-02T12:00:00">
             <symbol number="800" name="cielo claro" var="01d"/>
             <precipitation probability="0"/>
-            <windDirection deg="51" code="NE" name="NorthEast"/>
-            <windSpeed mps="1.92" unit="m/s" name="Light breeze"/>
-            <windGust gust="1.9" unit="m/s"/>
-            <temperature day="8.23" min="2.17" max="9.56" night="4.7" eve="4.88" morn="2.54" unit="celsius"/>
-            <feels_like day="8.23" night="3.74" eve="4.88" morn="0.75" unit="celsius"/>
-            <pressure unit="hPa" value="1031"/>
-            <humidity value="51" unit="%"/>
-            <clouds value="clear sky" all="2" unit="%"/>
+            <windDirection deg="236" code="SW" name="Southwest"/>
+            <windSpeed mps="2.07" unit="m/s" name="Light breeze"/>
+            <windGust gust="2.64" unit="m/s"/>
+            <temperature unit="celsius" value="6" min="6" max="8.07"/>
+            <feels_like value="4.46" unit="celsius"/>
+            <pressure unit="hPa" value="1030"/>
+            <humidity value="75" unit="%"/>
+            <clouds value="clear sky" all="4" unit="%"/>
+            <visibility value="10000"/>
         </time>
-        <time day="2025-01-02">
-            <sun rise="2025-01-02T07:36:49" set="2025-01-02T16:57:53"/>
-            <symbol number="800" name="cielo claro" var="01d"/>
-            <precipitation probability="0"/>
-            <windDirection deg="240" code="WSW" name="West-southwest"/>
-            <windSpeed mps="2.97" unit="m/s" name="Light breeze"/>
-            <windGust gust="3.84" unit="m/s"/>
-            <temperature day="8.21" min="1.97" max="9.8" night="4.49" eve="6.39" morn="2.08" unit="celsius"/>
-            <feels_like day="6.99" night="2.89" eve="4.71" morn="2.08" unit="celsius"/>
-            <pressure unit="hPa" value="1029"/>
-            <humidity value="64" unit="%"/>
-            <clouds value="few clouds" all="10" unit="%"/>
-        </time>
-        <time day="2025-01-03">
-            <sun rise="2025-01-03T07:36:52" set="2025-01-03T16:58:44"/>
-            <symbol number="804" name="nubes" var="04d"/>
-            <precipitation probability="0"/>
-            <windDirection deg="238" code="WSW" name="West-southwest"/>
-            <windSpeed mps="2.24" unit="m/s" name="Light breeze"/>
-            <windGust gust="2.8" unit="m/s"/>
-            <temperature day="7.86" min="2.35" max="9.01" night="5.92" eve="7.6" morn="2.59" unit="celsius"/>
-            <feels_like day="6.65" night="4.76" eve="6.87" morn="2.59" unit="celsius"/>
-            <pressure unit="hPa" value="1027"/>
-            <humidity value="61" unit="%"/>
-            <clouds value="overcast clouds" all="97" unit="%"/>
-        </time>
-        <time day="2025-01-04">
-            <sun rise="2025-01-04T07:36:52" set="2025-01-04T16:59:37"/>
+        <time from="2025-01-02T12:00:00" to="2025-01-02T15:00:00">
             <symbol number="802" name="nubes dispersas" var="03d"/>
             <precipitation probability="0"/>
             <windDirection deg="238" code="WSW" name="West-southwest"/>
-            <windSpeed mps="4.57" unit="m/s" name="Gentle Breeze"/>
-            <windGust gust="6.37" unit="m/s"/>
-            <temperature day="9.01" min="3.23" max="10.95" night="6.03" eve="7.23" morn="3.41" unit="celsius"/>
-            <feels_like day="7.72" night="4.48" eve="5.41" morn="2.29" unit="celsius"/>
-            <pressure unit="hPa" value="1025"/>
-            <humidity value="67" unit="%"/>
-            <clouds value="scattered clouds" all="36" unit="%"/>
+            <windSpeed mps="2.8" unit="m/s" name="Light breeze"/>
+            <windGust gust="3.44" unit="m/s"/>
+            <temperature unit="celsius" value="8.04" min="8.04" max="9.58"/>
+            <feels_like value="6.29" unit="celsius"/>
+            <pressure unit="hPa" value="1028"/>
+            <humidity value="65" unit="%"/>
+            <clouds value="scattered clouds" all="37" unit="%"/>
+            <visibility value="10000"/>
         </time>
-        <time day="2025-01-05">
-            <sun rise="2025-01-05T07:36:51" set="2025-01-05T17:00:31"/>
-            <symbol number="500" name="lluvia ligera" var="10d"/>
-            <precipitation probability="1" value="1.58" type="rain"/>
-            <windDirection deg="195" code="SSW" name="South-southwest"/>
-            <windSpeed mps="9.02" unit="m/s" name="Fresh Breeze"/>
-            <windGust gust="14.57" unit="m/s"/>
-            <temperature day="9.4" min="3.96" max="11.59" night="9.69" eve="9.63" morn="3.96" unit="celsius"/>
-            <feels_like day="6.57" night="6.02" eve="7.34" morn="2.26" unit="celsius"/>
-            <pressure unit="hPa" value="1015"/>
-            <humidity value="72" unit="%"/>
-            <clouds value="overcast clouds" all="100" unit="%"/>
-        </time>
-        <time day="2025-01-06">
-            <sun rise="2025-01-06T07:36:47" set="2025-01-06T17:01:27"/>
-            <symbol number="500" name="lluvia ligera" var="10d"/>
-            <precipitation probability="1" value="4.4" type="rain"/>
-            <windDirection deg="200" code="SSW" name="South-southwest"/>
-            <windSpeed mps="8.49" unit="m/s" name="Fresh Breeze"/>
-            <windGust gust="15" unit="m/s"/>
-            <temperature day="9.62" min="6.53" max="9.89" night="6.53" eve="6.91" morn="8.26" unit="celsius"/>
-            <feels_like day="6.27" night="2.91" eve="4.59" morn="4.84" unit="celsius"/>
-            <pressure unit="hPa" value="1006"/>
-            <humidity value="76" unit="%"/>
-            <clouds value="overcast clouds" all="98" unit="%"/>
-        </time>
-        <time day="2025-01-07">
-            <sun rise="2025-01-07T07:36:41" set="2025-01-07T17:02:24"/>
-            <symbol number="801" name="algo de nubes" var="02d"/>
+        <time from="2025-01-02T15:00:00" to="2025-01-02T18:00:00">
+            <symbol number="802" name="nubes dispersas" var="03n"/>
             <precipitation probability="0"/>
-            <windDirection deg="289" code="WNW" name="West-northwest"/>
-            <windSpeed mps="6.47" unit="m/s" name="Moderate breeze"/>
-            <windGust gust="10.89" unit="m/s"/>
-            <temperature day="7.66" min="3.24" max="8.41" night="4.39" eve="5.83" morn="3.24" unit="celsius"/>
-            <feels_like day="4.74" night="2.28" eve="2.21" morn="-0.47" unit="celsius"/>
-            <pressure unit="hPa" value="1019"/>
-            <humidity value="47" unit="%"/>
-            <clouds value="few clouds" all="12" unit="%"/>
+            <windDirection deg="212" code="SSW" name="South-southwest"/>
+            <windSpeed mps="2.15" unit="m/s" name="Light breeze"/>
+            <windGust gust="2.09" unit="m/s"/>
+            <temperature unit="celsius" value="6.31" min="6.31" max="6.31"/>
+            <feels_like value="4.75" unit="celsius"/>
+            <pressure unit="hPa" value="1027"/>
+            <humidity value="71" unit="%"/>
+            <clouds value="broken clouds" all="50" unit="%"/>
+            <visibility value="10000"/>
+        </time>
+        <time from="2025-01-02T18:00:00" to="2025-01-02T21:00:00">
+            <symbol number="804" name="nubes" var="04n"/>
+            <precipitation probability="0"/>
+            <windDirection deg="174" code="S" name="South"/>
+            <windSpeed mps="1.66" unit="m/s" name="Light breeze"/>
+            <windGust gust="1.59" unit="m/s"/>
+            <temperature unit="celsius" value="5.04" min="5.04" max="5.04"/>
+            <feels_like value="3.79" unit="celsius"/>
+            <pressure unit="hPa" value="1028"/>
+            <humidity value="78" unit="%"/>
+            <clouds value="overcast clouds" all="100" unit="%"/>
+            <visibility value="10000"/>
+        </time>
+        <time from="2025-01-02T21:00:00" to="2025-01-03T00:00:00">
+            <symbol number="803" name="muy nuboso" var="04n"/>
+            <precipitation probability="0"/>
+            <windDirection deg="151" code="SSE" name="South-southeast"/>
+            <windSpeed mps="1.01" unit="m/s" name="Calm"/>
+            <windGust gust="1.04" unit="m/s"/>
+            <temperature unit="celsius" value="3.48" min="3.48" max="3.48"/>
+            <feels_like value="3.48" unit="celsius"/>
+            <pressure unit="hPa" value="1029"/>
+            <humidity value="84" unit="%"/>
+            <clouds value="broken clouds" all="77" unit="%"/>
+            <visibility value="10000"/>
+        </time>
+        <time from="2025-01-03T00:00:00" to="2025-01-03T03:00:00">
+            <symbol number="804" name="nubes" var="04n"/>
+            <precipitation probability="0"/>
+            <windDirection deg="135" code="SE" name="SouthEast"/>
+            <windSpeed mps="0.87" unit="m/s" name="Calm"/>
+            <windGust gust="0.89" unit="m/s"/>
+            <temperature unit="celsius" value="2.81" min="2.81" max="2.81"/>
+            <feels_like value="2.81" unit="celsius"/>
+            <pressure unit="hPa" value="1028"/>
+            <humidity value="87" unit="%"/>
+            <clouds value="overcast clouds" all="100" unit="%"/>
+            <visibility value="10000"/>
+        </time>
+        <time from="2025-01-03T03:00:00" to="2025-01-03T06:00:00">
+            <symbol number="804" name="nubes" var="04n"/>
+            <precipitation probability="0"/>
+            <windDirection deg="138" code="SE" name="SouthEast"/>
+            <windSpeed mps="0.72" unit="m/s" name="Calm"/>
+            <windGust gust="0.79" unit="m/s"/>
+            <temperature unit="celsius" value="2.33" min="2.33" max="2.33"/>
+            <feels_like value="2.33" unit="celsius"/>
+            <pressure unit="hPa" value="1028"/>
+            <humidity value="88" unit="%"/>
+            <clouds value="overcast clouds" all="99" unit="%"/>
+            <visibility value="10000"/>
         </time>
     </forecast>
 </weatherdata>

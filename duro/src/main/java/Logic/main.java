@@ -21,7 +21,22 @@ public class main {
             System.out.printf("Fecha: %s, Temperatura: %.2f°C%n",
                     entrada.getKey(), entrada.getValue());
         }
-
+        Map<LocalDate, String> tiempo = WeatherAPI.obtenerTiempoPronostico();
+        for (Map.Entry<LocalDate, String> entrada : tiempo.entrySet()) {
+            System.out.printf("Fecha: %s, Descripción: %s%n",
+                    entrada.getKey(), entrada.getValue());
+        }
+        List<WeatherAPI.PronosticoIntervalo> pronosticosDiarios = WeatherAPI.obtenerPronosticoPorIntervalos(); 
+        for(WeatherAPI.PronosticoIntervalo p : pronosticosDiarios){
+            System.out.printf("Fecha y hora: %s,  Temperatura: %s,  Descripción: %s\n", 
+                    p.getFechaHora(), p.getTemperatura(), p.getDescripcion());
+        }
+        
+        WeatherAPI.actualizarPronosticoDiario(); 
+        for(WeatherAPI.PronosticoIntervalo p : pronosticosDiarios){
+            System.out.printf("Fecha y hora: %s,  Temperatura: %s,  Descripción: %s\n", 
+                    p.getFechaHora(), p.getTemperatura(), p.getDescripcion());
+        }
     }
 
 }

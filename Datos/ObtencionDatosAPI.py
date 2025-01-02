@@ -20,7 +20,7 @@ def formatear_xml(xml_string):
 def obtener_datos_tiempo():
     # URLs para ambas APIs (modificadas para XML)
     url_actual = f"https://api.openweathermap.org/data/2.5/weather?q={CIUDAD}&appid={API_KEY}&units=metric&lang=es&mode=xml"
-    url_pronostico = f"https://api.openweathermap.org/data/2.5/forecast/daily?q={CIUDAD}&cnt=7&appid={API_KEY}&units=metric&lang=es&mode=xml"
+    url_pronostico = f"https://api.openweathermap.org/data/2.5/forecast?q={CIUDAD}&cnt=7&appid={API_KEY}&units=metric&lang=es&mode=xml"
 
     try:
         # Obtener datos actuales

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<weatherdata>
+    <location>
+        <name>Alcalá de Henares</name>
+        <type/>
+        <country>ES</country>
+        <timezone>3600</timezone>
+        <location altitude="0" geobase="geonames" geobaseid="3130616" latitude="40.4821" longitude="-3.36"/>
+    </location>
+    <credit/>
+    <meta>
+        <lastupdate/>
+        <calctime>0</calctime>
+        <nextupdate/>
+    </meta>
+    <sun rise="2025-01-02T07:36:49" set="2025-01-02T16:57:53"/>
+    <forecast>
+        <time day="2025-01-02">
+            <sun rise="2025-01-02T07:36:49" set="2025-01-02T16:57:53"/>
+            <symbol name="cielo claro" number="800" var="01d"/>
+            <precipitation probability="0"/>
+            <windDirection code="WSW" deg="238" name="West-southwest"/>
+            <windSpeed mps="3.02" name="Light breeze" unit="m/s"/>
+            <windGust gust="3.83" unit="m/s"/>
+            <temperature day="9.06" eve="7.98" max="10.48" min="1.97" morn="2.21" night="4.71" unit="celsius"/>
+            <feels_like day="8.01" eve="6.57" morn="2.21" night="3.62" unit="celsius"/>
+            <pressure unit="hPa" value="1028"/>
+            <humidity unit="%" value="65"/>
+            <clouds all="6" unit="%" value="clear sky"/>
+        </time>
+        <time day="2025-01-03">
+            <sun rise="2025-01-03T07:36:52" set="2025-01-03T16:58:44"/>
+            <symbol name="nubes" number="804" var="04d"/>
+            <precipitation probability="0"/>
+            <windDirection code="SW" deg="232" name="Southwest"/>
+            <windSpeed mps="2.24" name="Light breeze" unit="m/s"/>
+            <windGust gust="2.83" unit="m/s"/>
+            <temperature day="7.62" eve="6.12" max="8.69" min="2.19" morn="2.36" night="5.57" unit="celsius"/>
+            <feels_like day="6.4" eve="6.12" morn="2.36" night="4.48" unit="celsius"/>
+            <pressure unit="hPa" value="1028"/>
+            <humidity unit="%" value="63"/>
+            <clouds all="96" unit="%" value="overcast clouds"/>
+        </time>
+        <time day="2025-01-04">
+            <sun rise="2025-01-04T07:36:52" set="2025-01-04T16:59:37"/>
+            <symbol name="nubes dispersas" number="802" var="03d"/>
+            <precipitation probability="0"/>
+            <windDirection code="SW" deg="234" name="Southwest"/>
+            <windSpeed mps="3.3" name="Light breeze" unit="m/s"/>
+            <windGust gust="5.1" unit="m/s"/>
+            <temperature day="8.87" eve="7.3" max="10.6" min="2.75" morn="3.03" night="6.48" unit="celsius"/>
+            <feels_like day="7.69" eve="5.59" morn="1.85" night="5.1" unit="celsius"/>
+            <pressure unit="hPa" value="1025"/>
+            <humidity unit="%" value="65"/>
+            <clouds all="40" unit="%" value="scattered clouds"/>
+        </time>
+        <time day="2025-01-05">
+            <sun rise="2025-01-05T07:36:51" set="2025-01-05T17:00:31"/>
+            <symbol name="lluvia ligera" number="500" var="10d"/>
+            <precipitation probability="1" type="rain" value="2.46"/>
+            <windDirection code="SSW" deg="210" name="South-southwest"/>
+            <windSpeed mps="7.06" name="Moderate breeze" unit="m/s"/>
+            <windGust gust="13.69" unit="m/s"/>
+            <temperature day="10.03" eve="9.41" max="11.22" min="3.72" morn="3.72" night="9.62" unit="celsius"/>
+            <feels_like day="8.92" eve="6.67" morn="2.05" night="6.49" unit="celsius"/>
+            <pressure unit="hPa" value="1015"/>
+            <humidity unit="%" value="70"/>
+            <clouds all="100" unit="%" value="overcast clouds"/>
+        </time>
+        <time day="2025-01-06">
+            <sun rise="2025-01-06T07:36:47" set="2025-01-06T17:01:27"/>
+            <symbol name="lluvia ligera" number="500" var="10d"/>
+            <precipitation probability="1" type="rain" value="4.58"/>
+            <windDirection code="S" deg="189" name="South"/>
+            <windSpeed mps="5.43" name="Gentle Breeze" unit="m/s"/>
+            <windGust gust="11.03" unit="m/s"/>
+            <temperature day="10.25" eve="9.22" max="10.87" min="6.75" morn="8.99" night="6.75" unit="celsius"/>
+            <feels_like day="9.45" eve="7.15" morn="6.24" night="3.89" unit="celsius"/>
+            <pressure unit="hPa" value="1007"/>
+            <humidity unit="%" value="81"/>
+            <clouds all="100" unit="%" value="overcast clouds"/>
+        </time>
+        <time day="2025-01-07">
+            <sun rise="2025-01-07T07:36:41" set="2025-01-07T17:02:24"/>
+            <symbol name="lluvia ligera" number="500" var="10d"/>
+            <precipitation probability="1" type="rain" value="1.47"/>
+            <windDirection code="SW" deg="225" name="Southwest"/>
+            <windSpeed mps="7.01" name="Moderate breeze" unit="m/s"/>
+            <windGust gust="15.85" unit="m/s"/>
+            <temperature day="7.8" eve="6.95" max="7.8" min="4.36" morn="4.36" night="7.68" unit="celsius"/>
+            <feels_like day="4.75" eve="3.02" morn="1.19" night="4.14" unit="celsius"/>
+            <pressure unit="hPa" value="1019"/>
+            <humidity unit="%" value="63"/>
+            <clouds all="50" unit="%" value="broken clouds"/>
+        </time>
+        <time day="2025-01-08">
+            <sun rise="2025-01-08T07:36:33" set="2025-01-08T17:03:22"/>
+            <symbol name="lluvia ligera" number="500" var="10d"/>
+            <precipitation probability="1" type="rain" value="7.77"/>
+            <windDirection code="WSW" deg="246" name="West-southwest"/>
+            <windSpeed mps="12.08" name="Strong breeze" unit="m/s"/>
+            <windGust gust="20.47" unit="m/s"/>
+            <temperature day="10.51" eve="9.66" max="11.32" min="8.7" morn="9.86" night="10.05" unit="celsius"/>
+            <feels_like day="9.91" eve="7.23" morn="6.36" night="9.33" unit="celsius"/>
+            <pressure unit="hPa" value="1013"/>
+            <humidity unit="%" value="88"/>
+            <clouds all="100" unit="%" value="overcast clouds"/>
+        </time>
+    </forecast>
+</weatherdata>

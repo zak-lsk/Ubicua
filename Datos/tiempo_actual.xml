@@ -4,20 +4,20 @@
         <coord lon="-3.36" lat="40.4821"/>
         <country>ES</country>
         <timezone>3600</timezone>
-        <sun rise="2025-01-01T07:36:44" set="2025-01-01T16:57:03"/>
+        <sun rise="2025-01-02T07:36:49" set="2025-01-02T16:57:53"/>
     </city>
-    <temperature value="4.54" min="4.07" max="5.85" unit="celsius"/>
-    <feels_like value="4.54" unit="celsius"/>
+    <temperature value="4.99" min="4.18" max="6.73" unit="celsius"/>
+    <feels_like value="4.99" unit="celsius"/>
     <humidity value="79" unit="%"/>
     <pressure value="1030" unit="hPa"/>
     <wind>
-        <speed value="1.03" unit="m/s" name="Calm"/>
+        <speed value="0.51" unit="m/s" name="Calm"/>
         <gusts/>
-        <direction value="340" code="NNW" name="North-northwest"/>
+        <direction/>
     </wind>
     <clouds value="0" name="clear sky"/>
     <visibility value="10000"/>
     <precipitation mode="no"/>
-    <weather number="800" value="cielo claro" icon="01n"/>
-    <lastupdate value="2025-01-01T18:55:02"/>
+    <weather number="800" value="cielo claro" icon="01d"/>
+    <lastupdate value="2025-01-02T10:17:14"/>
 </current>

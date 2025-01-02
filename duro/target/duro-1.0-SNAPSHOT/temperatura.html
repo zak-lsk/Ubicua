@@ -4,13 +4,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>SISDOGAR - Temperatura</title>
-        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
         <div class="ventana">
             <h2>Temperatura</h2>
             <div class="contenido">
                 <p>Actual: <span id="tempValue">--°C</span></p>
+                <div id="pronostico">
+                    <h3>Pronóstico de temperatura</h3>
+                    <div id="pronosticoData">Cargando pronóstico...</div>
+                </div>
                 <button onclick="enviarAccion('temperatura', 'encender')">Encender</button>
                 <button onclick="enviarAccion('temperatura', 'apagar')">Apagar</button>
                 <button onclick="location.href = 'index.html'">Volver</button>
@@ -19,11 +22,11 @@
         <script>
             function actualizarTemperatura() {
                 fetch('temperatura')
-                        .then(response => response.json())
-                        .then(data => {
-                            document.getElementById('tempValue').textContent = data.temperatura + '°C';
-                        })
-                        .catch(error => console.error('Error:', error));
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('tempValue').textContent = data.temperatura + '°C';
+                    })
+                    .catch(error => console.error('Error:', error));
             }
 
             // Actualizar cada 5 segundos

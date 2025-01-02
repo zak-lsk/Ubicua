@@ -4,6 +4,8 @@ import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
 import jakarta.servlet.annotation.WebListener;
 
+import java.io.File;
+
 import MQTT.MQTTBroker;
 import MQTT.MQTTPublisher;
 import MQTT.MQTTSubscriber;
@@ -13,6 +15,11 @@ public class Projectinitializer implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
+        //Al cerrar el servidor, eliminar los archivos de datos
+        File directorioDatos = new File(WeatherAPI.RUTA_DATOS);
+        if (directorioDatos.exists()) {
+            directorioDatos.delete();
+        }
     }
 
     @Override
@@ -30,6 +37,8 @@ public class Projectinitializer implements ServletContextListener {
         MQTTSubscriber suscriber = new MQTTSubscriber();
         suscriber.suscribeTopic(broker, "Casa/#");
         MQTTPublisher.publish(broker, "Casa/Test", "Hello from Tomcat :)");
+        
+        //Despues de 5 segundos publicar un mensaje de prueba
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
@@ -37,4 +46,6 @@ public class Projectinitializer implements ServletContextListener {
         }
         MQTTPublisher.publish(broker, "Casa/Test", "Hola de nuevo (5segundos después)");
     }
+
+    
 }
