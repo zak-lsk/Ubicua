@@ -16,7 +16,10 @@ public class MQTTSubscriber implements MqttCallback {
     private static MqttClient sampleClient;
     private static boolean estadoAlarma = false;
     private static boolean estadoAnteriorAlarma = false;
+    private static boolean estadoVentilacion = false; 
+    private static boolean modoVentilacion = false; 
     private static final String TOPIC_ALARMA_SONAR = "Casa/Salon/Alarma/Sonar";
+    private static int estadoAnteriorPresencia = -1;
     private MQTTBroker broker = new MQTTBroker();
 
     public void suscribeTopic(MQTTBroker broker, String topic) {
@@ -129,19 +132,27 @@ public class MQTTSubscriber implements MqttCallback {
 
             case "Presencia":
                 int hayMovimiento = Integer.parseInt(payload);
-                Logic.setDataMovimiento("Movimiento", hayMovimiento, topicParts[0] + "/" + topicParts[1]);
-                Log.logmqtt.info("Valor hayMovimiento " + hayMovimiento + " almacenado");
-                Log.logdb.info("Valor de movimiento almacenado en la base de datos");
-                // si hay movimiento y la alarma está activada, hacer que suene
-                if (hayMovimiento == 1 && estadoAlarma) {
-                    try {
-                        MQTTPublisher.publish(broker, TOPIC_ALARMA_SONAR, "true");
-                        estadoAnteriorAlarma = true;
-                        Log.logmqtt.info("Alarma sonando por detección de movimiento");
-                    } catch (Exception e) {
-                        Log.log.warn("Error al activar sonido de alarma: {}", e.getMessage());
+                //Guardar el valor de movimiento en caso de que haya cambiado
+                if (hayMovimiento != estadoAnteriorPresencia) {
+                    Logic.setDataMovimiento("Movimiento", hayMovimiento, topicParts[0] + "/" + topicParts[1]);
+                    Log.logmqtt.info("Valor hayMovimiento " + hayMovimiento + " almacenado");
+                    Log.logdb.info("Valor de movimiento almacenado en la base de datos");
+                    estadoAnteriorPresencia = hayMovimiento;
+                    // si hay movimiento y la alarma está activada, hacer que suene
+                    if (hayMovimiento == 1 && estadoAlarma) {
+                        try {
+                            //tiempo para desactivar la alarma en caso de 
+                            // que sea el usuario quien se haya movido
+                            Thread.sleep(30000);
+                            MQTTPublisher.publish(broker, TOPIC_ALARMA_SONAR, "true");
+                            estadoAnteriorAlarma = true;
+                            Log.logmqtt.info("Alarma sonando por detección de movimiento");
+                        } catch (Exception e) {
+                            Log.log.warn("Error al activar sonido de alarma: {}", e.getMessage());
+                        }
                     }
                 }
+
                 break;
 
             case "Ventana":
@@ -174,6 +185,21 @@ public class MQTTSubscriber implements MqttCallback {
 
                 }
                 break;
+            
+            case "Ventilacion": 
+                switch (topicParts[3]) {
+                    case "Activado": 
+                        estadoVentilacion = Boolean.parseBoolean(payload); 
+                        Log.logmqtt.info("Estado de ventilación actualizado: "
+                                + "{}", estadoVentilacion);
+                        break; 
+                    case "Modo": 
+                        modoVentilacion = Boolean.parseBoolean(payload); 
+                        Log.logmqtt.info("Mdod de ventilación actualizado: "
+                                + "{}", modoVentilacion); 
+                }
+                break; 
+                
 
             default:
                 Log.logmqtt.warn("Sensor no reconocido");
@@ -204,12 +230,12 @@ public class MQTTSubscriber implements MqttCallback {
 
     private void handleEntrada(String sensor, String[] topicParts, String payload) {
         if (sensor.equals("Paraguas")) {
-            
+
             if (topicParts.length > 3 && topicParts[3].equals("Servo")) {
-                
+
                 boolean estadoParaguas = Boolean.parseBoolean(payload);
-                
-                Log.logmqtt.info("Estado Paraguas actualizado : {}", 
+
+                Log.logmqtt.info("Estado Paraguas actualizado : {}",
                         estadoParaguas);
             }
         }

@@ -41,8 +41,8 @@ public class WeatherAPI {
             File directorioDatos = new File(RUTA_DATOS);
             if (!directorioDatos.exists()) {
                 if (!directorioDatos.mkdirs()) {
-                    throw new IOException("No se pudo crear el directorio en: " + directorioDatos.getAbsolutePath() + 
-                                       ". Verificando permisos...");
+                    throw new IOException("No se pudo crear el directorio en: " + directorioDatos.getAbsolutePath()
+                            + ". Verificando permisos...");
                 }
                 Log.log.info("Directorio creado en: " + directorioDatos.getAbsolutePath());
             }
@@ -57,20 +57,20 @@ public class WeatherAPI {
             // Inicializar URLs si no se ha hecho
             if (URLACTUUAL == null) {
                 URLACTUUAL = String.format(
-                    "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric&lang=es&mode=xml",
-                    CIUDADCODIFICADA, API_KEY);
+                        "https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s&units=metric&lang=es&mode=xml",
+                        CIUDADCODIFICADA, API_KEY);
             }
 
             if (URLPRONOSTICOSEMANAL == null) {
                 URLPRONOSTICOSEMANAL = String.format(
-                    "https://api.openweathermap.org/data/2.5/forecast/daily?q=%s&cnt=7&appid=%s&units=metric&lang=es&mode=xml",
-                    CIUDADCODIFICADA, API_KEY);
+                        "https://api.openweathermap.org/data/2.5/forecast/daily?q=%s&cnt=7&appid=%s&units=metric&lang=es&mode=xml",
+                        CIUDADCODIFICADA, API_KEY);
             }
 
             if (URLPRONOSTICODIARIO == null) {
                 URLPRONOSTICODIARIO = String.format(
-                    "https://api.openweathermap.org/data/2.5/forecast?q=%s&cnt=40&appid=%s&units=metric&lang=es&mode=xml",
-                    CIUDADCODIFICADA, API_KEY);
+                        "https://api.openweathermap.org/data/2.5/forecast?q=%s&cnt=40&appid=%s&units=metric&lang=es&mode=xml",
+                        CIUDADCODIFICADA, API_KEY);
             }
 
             // Realizar peticiones y guardar archivos
@@ -181,34 +181,55 @@ public class WeatherAPI {
     }
 
     public static List<PronosticoIntervalo> obtenerPronosticoPorIntervalos() throws Exception {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(new File(RUTA_PRONOSTICO_DIARIO));
+        try {
+            // Forzar actualización de datos
+            obtenerDatosTiempo();
+            
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document doc = builder.parse(new File(RUTA_PRONOSTICO_DIARIO));
 
-        NodeList tiempos = doc.getElementsByTagName("time");
-        List<PronosticoIntervalo> pronosticos = new ArrayList<>();
+            NodeList tiempos = doc.getElementsByTagName("time");
+            List<PronosticoIntervalo> pronosticos = new ArrayList<>();
 
-        for (int i = 0; i < tiempos.getLength(); i++) {
-            Element tiempo = (Element) tiempos.item(i);
+            // Añadir log para debug
+            Log.log.info("Obteniendo pronóstico por intervalos. Encontrados " + tiempos.getLength() + " intervalos.");
 
-            // Obtener fecha y hora
-            String desde = tiempo.getAttribute("from");
-            LocalDateTime fechaHora = LocalDateTime.parse(desde);
+            for (int i = 0; i < tiempos.getLength(); i++) {
+                Element tiempo = (Element) tiempos.item(i);
 
-            // Obtener temperatura
-            Element tempElement = (Element) tiempo.getElementsByTagName("temperature").item(0);
-            double temperatura = Double.parseDouble(tempElement.getAttribute("value"));
+                // Obtener fecha y hora
+                String desde = tiempo.getAttribute("from");
+                LocalDateTime fechaHora = LocalDateTime.parse(desde);
 
-            // Obtener descripción del tiempo
-            Element symbolElement = (Element) tiempo.getElementsByTagName("symbol").item(0);
-            String descripcion = symbolElement.getAttribute("name");
+                // Obtener temperatura
+                Element tempElement = (Element) tiempo.getElementsByTagName("temperature").item(0);
+                double temperatura = Double.parseDouble(tempElement.getAttribute("value"));
 
-            pronosticos.add(new PronosticoIntervalo(fechaHora, temperatura, descripcion));
+                // Obtener descripción del tiempo
+                Element symbolElement = (Element) tiempo.getElementsByTagName("symbol").item(0);
+                String descripcion = symbolElement.getAttribute("name");
+
+                pronosticos.add(new PronosticoIntervalo(fechaHora, temperatura, descripcion));
+                
+                
+            }
+
+            // Verificar que tenemos datos
+            if (pronosticos.isEmpty()) {
+                Log.log.warn("No se encontraron pronósticos en el archivo XML");
+            } else {
+                Log.log.info("Cargados {} pronósticos correctamente", pronosticos.size());
+            }
+
+            return pronosticos;
+
+        } catch (Exception e) {
+            Log.log.error("Error al obtener pronóstico por intervalos: " + e.getMessage(), e);
+            throw e;
         }
-
-        return pronosticos;
     }
-    
+
     public static void actualizarDatosActuales() throws Exception {
         //Comprobamos si el directorio existe, si no, lo creamos
         File directorioDatos = new File(RUTA_DATOS);
@@ -233,10 +254,8 @@ public class WeatherAPI {
         // Realizar la petición y guardar el archivo
         Document pronosticoSemanal = realizarPeticion(URLPRONOSTICOSEMANAL);
         guardarXML(pronosticoSemanal, RUTA_PRONOSTICO_SEMANAL);
-    }   
-    
-    
-    
+    }
+
     public static void actualizarPronosticoDiario() throws Exception {
         //Comprobamos si el directorio existe, si no, lo creamos
         File directorioDatos = new File(RUTA_DATOS);
@@ -249,8 +268,9 @@ public class WeatherAPI {
         Document pronosticoDiario = realizarPeticion(URLPRONOSTICODIARIO);
         guardarXML(pronosticoDiario, RUTA_PRONOSTICO_DIARIO);
     }
-    
+
     public static class PronosticoIntervalo {
+
         private LocalDateTime fechaHora;
         private double temperatura;
         private String descripcion;
@@ -262,9 +282,25 @@ public class WeatherAPI {
         }
 
         // Getters necesarios para la serialización JSON
-        public LocalDateTime getFechaHora() { return fechaHora; }
-        public double getTemperatura() { return temperatura; }
-        public String getDescripcion() { return descripcion; }
+        public LocalDateTime getFechaHora() {
+            return fechaHora;
+        }
+
+        public double getTemperatura() {
+            return temperatura;
+        }
+
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        public int getMes() {
+            return this.fechaHora.getMonthValue();
+        }
+
+        public int getDiaMes() {
+            return this.fechaHora.getDayOfMonth();
+        }
 
         // Opcional: método para formatear la fecha/hora de manera más amigable
         public String getFechaHoraFormateada() {

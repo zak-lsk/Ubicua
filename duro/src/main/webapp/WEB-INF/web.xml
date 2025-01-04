@@ -78,4 +78,14 @@
         <servlet-name>PronosticoServlet</servlet-name>
         <url-pattern>/PronosticoServlet</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>InteligenciaTemperatura</servlet-name>
+        <servlet-class>servlets.InteligenciaTemperatura</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InteligenciaTemperatura</servlet-name>
+        <url-pattern>/InteligenciaTemperatura</url-pattern>
+    </servlet-mapping>
 </web-app>

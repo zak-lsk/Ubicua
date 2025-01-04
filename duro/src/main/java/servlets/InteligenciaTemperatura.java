@@ -2,6 +2,7 @@
 package servlets;
 
 import Logic.Inteligencia;
+import Logic.Log;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -49,15 +50,17 @@ public class InteligenciaTemperatura extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/plain"); // Cambiado a texto plano
         response.setCharacterEncoding("UTF-8");
-
+        
         try (PrintWriter out = response.getWriter()) {
             // Llamar al método de inteligencia para comparar temperaturas
-            String accion = Inteligencia.compararTemperaturaConSensor(); 
-
+            String accion = Inteligencia.compararTemperaturaConSensor();
+            Log.log.info("Recomendación obtenida acerca del tiempo: " + 
+                    accion); 
+            
             // Escribir la acción directamente como texto plano
             out.write(accion);
         } catch (Exception e) {

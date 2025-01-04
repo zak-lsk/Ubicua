@@ -3,7 +3,9 @@ C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\db\ConectionDDBB.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\db\Topics.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Gas.java
+C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Inteligencia.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Lluvia.java
+C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\LocalDateTimeAdapter.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Log.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Logic.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Luz.java
@@ -17,6 +19,7 @@ C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\MQTT\MQTTPublisher.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\MQTT\MQTTSubscriber.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\AlarmaServlet.java
+C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\InteligenciaTemperatura.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\ParaguasServlet.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\PronosticoServlet.java
 C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\SisdogarControlador.java

@@ -11,6 +11,7 @@ db\Topics.class
 Logic\Logic.class
 Logic\Movimiento.class
 servlets\VentanaServlet.class
+Logic\Inteligencia.class
 Logic\Log.class
 Logic\WeatherAPI.class
 MQTT\MQTTSubscriber.class
@@ -24,3 +25,5 @@ Logic\Gas.class
 Logic\Projectinitializer.class
 servlets\TemperaturaServlet.class
 db\ConectionDDBB.class
+Logic\LocalDateTimeAdapter.class
+servlets\InteligenciaTemperatura.class
