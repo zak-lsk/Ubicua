@@ -19,6 +19,7 @@ public class Inteligencia {
     private static boolean VENTANA_ABIERTA = true; //true -> ventana abierta
     private static boolean ESTADO_VENTILACION = true; //true -> ventilacion encendida
     private static boolean MODO_VENTILACION = true; //true -> aire acondicionado; false -> calefaccion
+    private static boolean PARAGUAS_ABIERTO = false; // Estado del paraguas
 
     public static String compararTemperaturaConSensor() {
         try {
@@ -199,11 +200,13 @@ public class Inteligencia {
     }
 
     /**
-     * Método para encender la ventilación publicando en el topic correspondiente
+     * Método para encender la ventilación publicando en el topic
+     * correspondiente
+     *
      * @param broker Broker a donde se va a publicar
-     * @param modo Modo de ventilación,
-     * true: Aire acondicionado; false: Calefacción
-     * 
+     * @param modo Modo de ventilación, true: Aire acondicionado; false:
+     * Calefacción
+     *
      */
     private static void encenderVentilacion(MQTTBroker broker, boolean modo) {
         cerrarVentanas(broker);
@@ -225,10 +228,10 @@ public class Inteligencia {
     }
 
     private static void apagarVentilacion(MQTTBroker broker) {
-        
+
         // en caso de que la ventilacion estaba encendida
         if (ESTADO_VENTILACION) {
-            
+
             // apagarla
             MQTTPublisher.publish(broker, "Casa/Salon/Ventilacion/Activado", "false");
             ESTADO_VENTILACION = false;
@@ -237,9 +240,11 @@ public class Inteligencia {
     }
 
     /**
-     * Método para determinar si el usuario se encuentra en casa basándose en 
-     * sus hábitos 
-     * @return Boolean: true: se encuentra en casa; false: se encuentra fuera de casa
+     * Método para determinar si el usuario se encuentra en casa basándose en
+     * sus hábitos
+     *
+     * @return Boolean: true: se encuentra en casa; false: se encuentra fuera de
+     * casa
      */
     public static boolean usuarioEnCasa() {
 
@@ -263,17 +268,17 @@ public class Inteligencia {
 
         // Verificar si el movimiento es reciente (por ejemplo, dentro de los últimos 30 minutos)
         if (diferenciaEnMinutos <= 30 && ultimoMovimiento.getHayMovimiento() == 1) {
-            
+
             //en caso de que hay movimiento durante 30 minutos
             Log.log.info("Usuario está en casa. Movimiento reciente detectado.");
             return true;
-            
+
         } else {
-            
+
             //en caso de que no haya movimiento durante 30 minutos 
             Log.log.info("Usuario no está en casa. No hay movimiento reciente.");
             return false;
-            
+
         }
     }
 
@@ -551,9 +556,8 @@ public class Inteligencia {
                         ));
 
                         recomendacion.append("Te recomiendo llevar paraguas.");
-                        
-                        // publicar en el topic para sacar paraguas 
 
+                        // publicar en el topic para sacar paraguas 
                     } else {
 
                         recomendacion.append(String.format(
@@ -563,9 +567,8 @@ public class Inteligencia {
                         ));
 
                         recomendacion.append("No necesitarás paraguas.");
-                        
+
                         // publicar en el topic para cerrar el paraguas
-                        
                     }
 
                     return recomendacion.toString();
@@ -579,10 +582,8 @@ public class Inteligencia {
                             ahora.format(DateTimeFormatter.ofPattern("EEEE")),
                             Math.round(probabilidad * 100)
                     );
-                    
-                    // en todo caso, publicar en el topic para cerrar el paraguas
-                    
 
+                    // en todo caso, publicar en el topic para cerrar el paraguas
                 }
             }
 
@@ -592,6 +593,71 @@ public class Inteligencia {
             Log.log.error("Error al analizar hábitos de salida: " + e.getMessage());
             return "Error al analizar hábitos de salida.";
         }
+    }
+
+    public static String gestionarParaguas() {
+        try {
+            // Verificar si el usuario está en casa
+            boolean usuarioPresente = usuarioEnCasa();
+
+            // Obtener los datos del sensor de lluvia
+            ArrayList<Lluvia> sensorLluviaDetecta = Logic.getDataLluvia("Lluvia");
+            int ultimo = sensorLluviaDetecta.size() - 1;
+            // Obtener el último dato registrado de la tabla de lluvia
+            boolean hayLluvia = sensorLluviaDetecta.get(ultimo).getHayLluvia() == 1;
+
+            // Obtener el pronóstico del tiempo
+            List<WeatherAPI.PronosticoIntervalo> pronosticos = WeatherAPI.obtenerPronosticoPorIntervalos();
+
+            // Verificar si se espera lluvia según el pronóstico
+            boolean pronosticoLluvia = pronosticos.stream()
+                    .limit(3) // Solo analizar los primeros 3 intervalos (9 horas)
+                    .anyMatch(pronostico -> pronostico.getDescripcion().toLowerCase().contains("lluvia"));
+
+            MQTTBroker broker = new MQTTBroker();
+
+            if (usuarioPresente) {
+                // El usuario está en casa, decidir si abrir el paraguas
+                if (hayLluvia || pronosticoLluvia) {
+                    if (!PARAGUAS_ABIERTO) {
+                        abrirParaguas(broker);
+                        return "Paraguas abierto debido a detección o pronóstico de lluvia.";
+                    } else {
+                        return "Paraguas ya está abierto debido a lluvia.";
+                    }
+                } else {
+                    if (PARAGUAS_ABIERTO) {
+                        cerrarParaguas(broker);
+                        return "Paraguas cerrado debido a condiciones favorables.";
+                    } else {
+                        return "Paraguas ya está cerrado.";
+                    }
+                }
+            } else {
+                // El usuario no está en casa, cerrar el paraguas si está abierto
+                if (PARAGUAS_ABIERTO) {
+                    cerrarParaguas(broker);
+                    return "Paraguas cerrado porque el usuario ya no está en casa.";
+                } else {
+                    return "El usuario no está en casa y el paraguas ya está cerrado.";
+                }
+            }
+        } catch (Exception e) {
+            Log.log.error("Error al gestionar el paraguas: " + e.getMessage());
+            return "Error al gestionar el paraguas.";
+        }
+    }
+
+    private static void abrirParaguas(MQTTBroker broker) {
+        MQTTPublisher.publish(broker, "Casa/Patio/Paraguas/Servo", "true");
+        PARAGUAS_ABIERTO = true;
+        Log.log.info("Paraguas abierto correctamente.");
+    }
+
+    private static void cerrarParaguas(MQTTBroker broker) {
+        MQTTPublisher.publish(broker, "Casa/Patio/Paraguas/Servo", "false");
+        PARAGUAS_ABIERTO = false;
+        Log.log.info("Paraguas cerrado correctamente.");
     }
 
     private static boolean esInvierno() {
