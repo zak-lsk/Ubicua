@@ -29,14 +29,16 @@
     <script>
         // Actualizar estado del paraguas llamando al servlet
         function actualizarEstadoParaguas() {
-            fetch('paraguas', { method: 'POST' })
+            fetch('GestionarParaguas', { method: 'POST' })
                 .then(response => {
+                    console.log('Respuesta del servidor:', response); // Log de respuesta
                     if (!response.ok) {
                         throw new Error('Error al obtener el estado del paraguas');
                     }
                     return response.text();
                 })
                 .then(data => {
+                    console.log('Datos recibidos:', data); // Log de datos
                     document.getElementById('paraguasTexto').textContent = data;
                 })
                 .catch(error => {
