@@ -17,6 +17,7 @@ Logic\WeatherAPI.class
 MQTT\MQTTSubscriber.class
 Logic\Temperatura.class
 Logic\PronosticoIntervalo.class
+servlets\GestionarParaguas.class
 MQTT\MQTTBroker.class
 servlets\PronosticoServlet.class
 com\mycompany\duro\resources\JakartaEE10Resource.class
