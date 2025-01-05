@@ -195,7 +195,7 @@ public class MQTTSubscriber implements MqttCallback {
                         break; 
                     case "Modo": 
                         modoVentilacion = Boolean.parseBoolean(payload); 
-                        Log.logmqtt.info("Mdod de ventilación actualizado: "
+                        Log.logmqtt.info("Modo de ventilación actualizado: "
                                 + "{}", modoVentilacion); 
                 }
                 break; 

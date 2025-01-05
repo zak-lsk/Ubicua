@@ -24,6 +24,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 public class WeatherAPI {
 
@@ -184,7 +186,7 @@ public class WeatherAPI {
         try {
             // Forzar actualización de datos
             obtenerDatosTiempo();
-            
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(new File(RUTA_PRONOSTICO_DIARIO));
@@ -201,7 +203,17 @@ public class WeatherAPI {
                 // Obtener fecha y hora
                 String desde = tiempo.getAttribute("from");
                 LocalDateTime fechaHora = LocalDateTime.parse(desde);
+                
+                // Convertir a zona horaria de Madrid
+                // ya que nos da el pronóstico con una hora de retraso
+                // al ser la API de Reino Unido
+                ZonedDateTime fechaHoraMadrid = fechaHora
+                        .atZone(ZoneId.of("UTC"))
+                        .withZoneSameInstant(ZoneId.of("Europe/Madrid"));
 
+                // Convertir de nuevo a LocalDateTime
+                LocalDateTime fechaHoraLocal = fechaHoraMadrid.toLocalDateTime();
+                
                 // Obtener temperatura
                 Element tempElement = (Element) tiempo.getElementsByTagName("temperature").item(0);
                 double temperatura = Double.parseDouble(tempElement.getAttribute("value"));
@@ -209,10 +221,10 @@ public class WeatherAPI {
                 // Obtener descripción del tiempo
                 Element symbolElement = (Element) tiempo.getElementsByTagName("symbol").item(0);
                 String descripcion = symbolElement.getAttribute("name");
+                
+                //añadir dicho pronóstico
+                pronosticos.add(new PronosticoIntervalo(fechaHoraLocal, temperatura, descripcion));
 
-                pronosticos.add(new PronosticoIntervalo(fechaHora, temperatura, descripcion));
-                
-                
             }
 
             // Verificar que tenemos datos
