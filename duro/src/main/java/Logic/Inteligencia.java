@@ -96,8 +96,8 @@ public class Inteligencia {
                         // Cerrar las ventanas
                         cerrarVentanas(broker);
 
-                        return "Calefacción activada: Temperatura interior baja. \\n"
-                                + "Temperatura interior: " + media_temp + " ºC\\n"
+                        return "Calefacción activada: Temperatura interior baja. \n"
+                                + "Temperatura interior: " + media_temp + " ºC\n"
                                 + "Temperatura exterior: " + mediaApi + " ºC";
 
                     } else if (media_temp > TEMP_CONFORT_MAX && esVerano) {
@@ -110,17 +110,17 @@ public class Inteligencia {
                         // Cerrar las ventanas
                         cerrarVentanas(broker);
 
-                        return "Aire acondicionado activado: Temperatura interior alta. \\n"
-                                + "Temperatura interior: " + media_temp + " ºC.\\n"
+                        return "Aire acondicionado activado: Temperatura interior alta. \n"
+                                + "Temperatura interior: " + media_temp + " ºC.\n"
                                 + "Temperatura exterior: " + mediaApi + " ºC.";
 
                     } else {
 
                         Log.log.info("No se toma acción: temperatura exterior no presenta ajustes");
 
-                        return "No se toma acción: temperatura exterior no presenta ajustes. \\n"
-                                + "Temperatura exterior: " + mediaApi + " ºC. \\n"
-                                + "Temperatura interior: " + media_temp + " ºC. \\n";
+                        return "No se toma acción: temperatura exterior no presenta ajustes. \n"
+                                + "Temperatura exterior: " + mediaApi + " ºC. \n"
+                                + "Temperatura interior: " + media_temp + " ºC. \n";
 
                     }
                 }
@@ -195,6 +195,7 @@ public class Inteligencia {
      * @param broker Broker donde se va a publicar el mensaje para abrir las ventanas
      */
     private static void abrirVentanas(MQTTBroker broker) {
+        apagarVentilacion(broker);
         if (!Util.ESTADO_VENTANA) {
             MQTTPublisher.publish(broker, Util.TOPIC_VENTANA, "true");
             Util.ESTADO_VENTANA = true;
@@ -213,6 +214,7 @@ public class Inteligencia {
      *
      */
     private static void encenderVentilacion(MQTTBroker broker, boolean modo) {
+        Log.log.info("cerrar ventanas desde encenderVentilacion");
         cerrarVentanas(broker);
         if (!Util.ESTADO_VENTILACION) { // si ya estaba apagada
 
@@ -243,7 +245,7 @@ public class Inteligencia {
             // apagarla
             MQTTPublisher.publish(broker, Util.TOPIC_VENTILACION_ACTIVAR, "false");
             Util.ESTADO_VENTILACION = false;
-
+            Log.log.info("Ventilacion apagada correctamente"); 
         }
     }
 
@@ -282,7 +284,7 @@ public class Inteligencia {
         int tiempoMaximoSinMovimiento;
 
         if (horaActual >= 23 || horaActual < 6) {
-            // Durante la noche (23:00 - 7:00), permitir hasta 8 horas sin movimiento
+            // Durante la noche (23:00 - 6:00), permitir hasta 8 horas sin movimiento
             tiempoMaximoSinMovimiento = 480; // 8 horas en minutos
             Log.log.debug("Horario nocturno: permitiendo {} minutos sin movimiento", tiempoMaximoSinMovimiento);
         } else if (horaActual >= 6 && horaActual < 9) {
@@ -440,7 +442,7 @@ public class Inteligencia {
             boolean usuarioPresente = usuarioEnCasa();
 
             // Verificar si el usuario saldrá pronto de casa 
-            boolean usuarioSaldraPronto = usuarioSaldraPronto();
+            //boolean usuarioSaldraPronto = usuarioSaldraPronto();
 
             // Obtener los datos del sensor de lluvia
             ArrayList<Lluvia> sensorLluviaDetecta = Logic.getDataLluvia("Lluvia");
@@ -458,7 +460,7 @@ public class Inteligencia {
 
             MQTTBroker broker = new MQTTBroker();
 
-            if (usuarioPresente && usuarioSaldraPronto) {
+            if (usuarioPresente) {
                 // El usuario está en casa
 
                 if (hayLluvia || pronosticoLluvia) {
@@ -535,116 +537,116 @@ public class Inteligencia {
      * @return true si hay alta probabilidad de salida próxima, false en caso
      * contrario
      */
-    public static boolean usuarioSaldraPronto() {
-        try {
-            ArrayList<Movimiento> movimientos = Logic.getDataMovimiento("Movimiento");
-
-            // Verificar si hay datos
-            if (movimientos.isEmpty()) {
-                Log.log.warn("No hay datos de movimiento disponibles.");
-                return false;
-            }
-
-            // Obtener hora y día actuales
-            ZoneId zonaMadrid = ZoneId.of("Europe/Madrid");
-            ZonedDateTime ahora = ZonedDateTime.now(zonaMadrid);
-            int diaActual = ahora.getDayOfWeek().getValue();
-            int horaActual = ahora.getHour();
-
-            // Si es horario nocturno (21:00 - 06:00), asumir que el usuario va a dormir o está durmiendo
-            if (horaActual >= 21 || horaActual < 6) {
-                Log.log.info("Horario nocturno ({}:00). Usuario probablemente va a dormir o está durmiendo",
-                        horaActual);
-                return false;
-            }
-
-            // Definir ventana de tiempo para analizar (próximas 2 horas)
-            int ventanaAnalisis = 2;
-
-            Log.log.info("Verificando patrones de salida para día {} y hora actual {}",
-                    diaActual, horaActual);
-
-            // Mapa para contar salidas por hora
-            Map<Integer, Integer> salidasPorHora = new HashMap<>();
-            Set<LocalDate> diasAnalizados = new HashSet<>();
-
-            // Analizar los movimientos históricos
-            for (int i = 0; i < movimientos.size() - 1; i++) {
-                Movimiento actual = movimientos.get(i);
-                Movimiento siguiente = movimientos.get(i + 1);
-
-                // Convertir fechas a zona horaria local
-                ZonedDateTime fechaActual = actual.getFecha()
-                        .toInstant()
-                        .atZone(zonaMadrid);
-
-                // Solo analizar el mismo día de la semana y evitar horario nocturno
-                if (fechaActual.getDayOfWeek().getValue() == diaActual
-                        && fechaActual.getHour() >= 6 && fechaActual.getHour() < 21) {
-
-                    diasAnalizados.add(fechaActual.toLocalDate());
-                    int horaMovimiento = fechaActual.getHour();
-
-                    // Detectar patrón de salida (movimiento seguido de no movimiento prolongado)
-                    if (actual.getHayMovimiento() == 1 && siguiente.getHayMovimiento() == 0) {
-                        // Calcular tiempo sin movimiento
-                        long minutosSinMovimiento = java.time.Duration.between(
-                                actual.getFecha().toInstant(),
-                                siguiente.getFecha().toInstant()
-                        ).toMinutes();
-
-                        // Si hay más de 30 minutos sin movimiento, considerar como salida
-                        // excepto si es horario nocturno
-                        if (minutosSinMovimiento >= 30) {
-                            salidasPorHora.merge(horaMovimiento, 1, Integer::sum);
-                        }
-                    }
-                }
-            }
-
-            // Analizar si hay patrones de salida en las próximas horas
-            int totalSalidasProximas = 0;
-            int maxSalidasHora = 0;
-            int horaMasProbable = -1;
-
-            for (int hora = horaActual + 1; hora <= horaActual + ventanaAnalisis; hora++) {
-                // Ignorar análisis si entramos en horario nocturno
-                if (hora >= 23 || hora < 6) {
-                    continue;
-                }
-
-                //contar el número de salidas para cada hora
-                //en caso de no encontrar la hora devolver 0
-                int salidas = salidasPorHora.getOrDefault(hora, 0);
-                totalSalidasProximas += salidas;
-
-                if (salidas > maxSalidasHora) {
-                    maxSalidasHora = salidas;
-                    horaMasProbable = hora;
-                }
-            }
-
-            // Calcular probabilidad de salida
-            if (!diasAnalizados.isEmpty() && horaMasProbable != -1) {
-                double probabilidad = (double) maxSalidasHora / diasAnalizados.size();
-
-                Log.log.info("Probabilidad de salida a las {}:00: {}%",
-                        horaMasProbable,
-                        Math.round(probabilidad * 100));
-
-                // Si la probabilidad es mayor al 30%, considerar que saldrá pronto
-                if (probabilidad > 0.3) {
-                    Log.log.info("Alta probabilidad de salida en la proxima hora");
-                    return true;
-                }
-            }
-
-            Log.log.info("No se detectan patrones claros de salida proxima");
-            return false;
-
-        } catch (Exception e) {
-            Log.log.error("Error al analizar patrones de salida: " + e.getMessage());
-            return false;
-        }
-    }
+//    public static boolean usuarioSaldraPronto() {
+//        try {
+//            ArrayList<Movimiento> movimientos = Logic.getDataMovimiento("Movimiento");
+//
+//            // Verificar si hay datos
+//            if (movimientos.isEmpty()) {
+//                Log.log.warn("No hay datos de movimiento disponibles.");
+//                return false;
+//            }
+//
+//            // Obtener hora y día actuales
+//            ZoneId zonaMadrid = ZoneId.of("Europe/Madrid");
+//            ZonedDateTime ahora = ZonedDateTime.now(zonaMadrid);
+//            int diaActual = ahora.getDayOfWeek().getValue();
+//            int horaActual = ahora.getHour();
+//
+//            // Si es horario nocturno (21:00 - 06:00), asumir que el usuario va a dormir o está durmiendo
+//            if (horaActual >= 21 || horaActual < 6) {
+//                Log.log.info("Horario nocturno ({}:00). Usuario probablemente va a dormir o está durmiendo",
+//                        horaActual);
+//                return false;
+//            }
+//
+//            // Definir ventana de tiempo para analizar (próximas 2 horas)
+//            int ventanaAnalisis = 2;
+//
+//            Log.log.info("Verificando patrones de salida para día {} y hora actual {}",
+//                    diaActual, horaActual);
+//
+//            // Mapa para contar salidas por hora
+//            Map<Integer, Integer> salidasPorHora = new HashMap<>();
+//            Set<LocalDate> diasAnalizados = new HashSet<>();
+//
+//            // Analizar los movimientos históricos
+//            for (int i = 0; i < movimientos.size() - 1; i++) {
+//                Movimiento actual = movimientos.get(i);
+//                Movimiento siguiente = movimientos.get(i + 1);
+//
+//                // Convertir fechas a zona horaria local
+//                ZonedDateTime fechaActual = actual.getFecha()
+//                        .toInstant()
+//                        .atZone(zonaMadrid);
+//
+//                // Solo analizar el mismo día de la semana y evitar horario nocturno
+//                if (fechaActual.getDayOfWeek().getValue() == diaActual
+//                        && fechaActual.getHour() >= 6 && fechaActual.getHour() < 21) {
+//
+//                    diasAnalizados.add(fechaActual.toLocalDate());
+//                    int horaMovimiento = fechaActual.getHour();
+//
+//                    // Detectar patrón de salida (movimiento seguido de no movimiento prolongado)
+//                    if (actual.getHayMovimiento() == 1 && siguiente.getHayMovimiento() == 0) {
+//                        // Calcular tiempo sin movimiento
+//                        long minutosSinMovimiento = java.time.Duration.between(
+//                                actual.getFecha().toInstant(),
+//                                siguiente.getFecha().toInstant()
+//                        ).toMinutes();
+//
+//                        // Si hay más de 30 minutos sin movimiento, considerar como salida
+//                        // excepto si es horario nocturno
+//                        if (minutosSinMovimiento >= 30) {
+//                            salidasPorHora.merge(horaMovimiento, 1, Integer::sum);
+//                        }
+//                    }
+//                }
+//            }
+//
+//            // Analizar si hay patrones de salida en las próximas horas
+//            int totalSalidasProximas = 0;
+//            int maxSalidasHora = 0;
+//            int horaMasProbable = -1;
+//
+//            for (int hora = horaActual + 1; hora <= horaActual + ventanaAnalisis; hora++) {
+//                // Ignorar análisis si entramos en horario nocturno
+//                if (hora >= 23 || hora < 6) {
+//                    continue;
+//                }
+//
+//                //contar el número de salidas para cada hora
+//                //en caso de no encontrar la hora devolver 0
+//                int salidas = salidasPorHora.getOrDefault(hora, 0);
+//                totalSalidasProximas += salidas;
+//
+//                if (salidas > maxSalidasHora) {
+//                    maxSalidasHora = salidas;
+//                    horaMasProbable = hora;
+//                }
+//            }
+//
+//            // Calcular probabilidad de salida
+//            if (!diasAnalizados.isEmpty() && horaMasProbable != -1) {
+//                double probabilidad = (double) maxSalidasHora / diasAnalizados.size();
+//
+//                Log.log.info("Probabilidad de salida a las {}:00: {}%",
+//                        horaMasProbable,
+//                        Math.round(probabilidad * 100));
+//
+//                // Si la probabilidad es mayor al 30%, considerar que saldrá pronto
+//                if (probabilidad > 0.3) {
+//                    Log.log.info("Alta probabilidad de salida en la proxima hora");
+//                    return true;
+//                }
+//            }
+//
+//            Log.log.info("No se detectan patrones claros de salida proxima");
+//            return false;
+//
+//        } catch (Exception e) {
+//            Log.log.error("Error al analizar patrones de salida: " + e.getMessage());
+//            return false;
+//        }
+//    }
 }

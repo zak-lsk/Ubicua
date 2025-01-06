@@ -19,9 +19,10 @@ public class Util {
     public static final String TOPIC_PARAGUAS = "Casa/Entrada/Paraguas/Servo";
     public static final String TOPIC_TEST = "Casa/Test"; 
     public static int ESTADO_ANTERIOR_PRESENCIA = -1; 
+    public static int ESTADO_PRESENCIA = -1; 
     public static boolean ESTADO_ALARMA = false;  // false -> no activada
     public static boolean ESTADO_ANTERIOR_ALARMA = false; // true -> activada previamente
-    public static boolean ESTADO_VENTILACION = true; // true -> encendido
+    public static boolean ESTADO_VENTILACION = false; // true -> encendido
     public static boolean MODO_VENTILACION = true; // true -> aire acondicionado, false -> calefacción
     public static boolean ESTADO_VENTANA = true; // true -> ventana abierta
     public static boolean ESTADO_PARAGUAS = false; // true -> paraguas abierto

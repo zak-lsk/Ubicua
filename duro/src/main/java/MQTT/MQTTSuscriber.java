@@ -126,6 +126,7 @@ public class MQTTSuscriber implements MqttCallback {
 
             case "Presencia":
                 int hayMovimiento = Integer.parseInt(payload);
+                Util.ESTADO_PRESENCIA = hayMovimiento; 
                 //Guardar el valor de movimiento en caso de que haya cambiado
                 if (hayMovimiento != Util.ESTADO_ANTERIOR_PRESENCIA) {
                     Logic.setDataMovimiento("Movimiento", hayMovimiento, topicParts[0] + "/" + topicParts[1]);
