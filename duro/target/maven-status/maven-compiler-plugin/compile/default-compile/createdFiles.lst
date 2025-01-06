@@ -1,4 +1,5 @@
 MQTT\MQTTPublisher.class
+servlets\ActivarAlarmaServlet.class
 Logic\WeatherAPI$PronosticoIntervalo.class
 servlets\ParaguasServlet.class
 servlets\TemperaturaServlet$TemperaturaResponse.class

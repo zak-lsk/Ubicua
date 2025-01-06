@@ -527,7 +527,48 @@ public class Inteligencia {
         int mes = calendario.get(java.util.Calendar.MONTH) + 1; // Enero = 0
         return (mes == 11 || mes <= 3); // Invierno: diciembre, enero, febrero y marzo
     }
+    
+    public static String gestionarAlarma() {
+        try {
+            // Verificar si la alarma está activada
+            if (!Util.ESTADO_ALARMA) {
+                return "{\"alarmaActivada\": false, \"movimientoDetectado\": false}";
+            }
+            // Verificar si hay movimiento en casa, y la alarma está activada
+            else if (usuarioEnCasa()) {
+                // Movimiento detectado con alarma activada
+                return "{\"alarmaActivada\": true, \"movimientoDetectado\": true}";
+            }
+            // Alarma activada, pero no hay movimiento
+            else{
+                return "{\"alarmaActivada\": true, \"movimientoDetectado\": false}";
+            }
+        } catch (Exception e) {
+            Log.log.error("Error al gestionar la alarma: " + e.getMessage());
+            return "{\"error\": \"Error al gestionar la alarma\"}";
+        }
+    }
+    
+    public static void sonarAlarma() {
+        try {
+            MQTTBroker broker = new MQTTBroker();
+            MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_SONAR, "true");
+            Log.logmqtt.info("Alarma activada y sonando.");
+        } catch (Exception e) {
+            Log.log.error("Error al hacer sonar la alarma: " + e.getMessage());
+        }
+    }
 
+    public static void desactivarAlarma() {
+        try {
+            Util.ESTADO_ALARMA = false;
+            MQTTBroker broker = new MQTTBroker();
+            MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_ACTIVAR, "false");
+            Log.logmqtt.info("Alarma desactivada.");
+        } catch (Exception e) {
+            Log.log.error("Error al desactivar la alarma: " + e.getMessage());
+        }
+    }
     /**
      * Método para predecir si el usuario saldrá de casa en las próximas 
      * 2 horas basándose en patrones históricos de movimiento. 

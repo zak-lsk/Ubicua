@@ -1,29 +1,30 @@
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\com\mycompany\duro\JakartaRestConfiguration.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\com\mycompany\duro\resources\JakartaEE10Resource.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\db\ConectionDDBB.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\db\Topics.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Gas.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Inteligencia.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Lluvia.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\LocalDateTimeAdapter.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Log.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Logic.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Luz.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\main.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Movimiento.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Projectinitializer.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\PronosticoIntervalo.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Temperatura.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\Util.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\Logic\WeatherAPI.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\MQTT\MQTTBroker.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\MQTT\MQTTPublisher.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\MQTT\MQTTSuscriber.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\AlarmaServlet.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\GestionarParaguas.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\InteligenciaTemperatura.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\ParaguasServlet.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\PronosticoServlet.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\SisdogarControlador.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\TemperaturaServlet.java
-C:\Users\zakil\Documents\Universidad\Materias-Uni 3\Computación ubicua\LAB\PL3\Ubicua\duro\src\main\java\servlets\VentanaServlet.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\com\mycompany\duro\JakartaRestConfiguration.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\com\mycompany\duro\resources\JakartaEE10Resource.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\db\ConectionDDBB.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\db\Topics.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Gas.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Inteligencia.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Lluvia.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\LocalDateTimeAdapter.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Log.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Logic.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Luz.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\main.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Movimiento.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Projectinitializer.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\PronosticoIntervalo.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Temperatura.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\Util.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\Logic\WeatherAPI.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\MQTT\MQTTBroker.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\MQTT\MQTTPublisher.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\MQTT\MQTTSuscriber.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\ActivarAlarmaServlet.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\AlarmaServlet.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\GestionarParaguas.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\InteligenciaTemperatura.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\ParaguasServlet.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\PronosticoServlet.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\SisdogarControlador.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\TemperaturaServlet.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\VentanaServlet.java
