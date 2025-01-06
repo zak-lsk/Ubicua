@@ -11,15 +11,9 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import db.Topics;
 import Logic.*;
 
-public class MQTTSubscriber implements MqttCallback {
+public class MQTTSuscriber implements MqttCallback {
 
     private static MqttClient sampleClient;
-    private static boolean estadoAlarma = false;
-    private static boolean estadoAnteriorAlarma = false;
-    private static boolean estadoVentilacion = false; 
-    private static boolean modoVentilacion = false; 
-    private static final String TOPIC_ALARMA_SONAR = "Casa/Salon/Alarma/Sonar";
-    private static int estadoAnteriorPresencia = -1;
     private MQTTBroker broker = new MQTTBroker();
 
     public void suscribeTopic(MQTTBroker broker, String topic) {
@@ -133,19 +127,19 @@ public class MQTTSubscriber implements MqttCallback {
             case "Presencia":
                 int hayMovimiento = Integer.parseInt(payload);
                 //Guardar el valor de movimiento en caso de que haya cambiado
-                if (hayMovimiento != estadoAnteriorPresencia) {
+                if (hayMovimiento != Util.ESTADO_ANTERIOR_PRESENCIA) {
                     Logic.setDataMovimiento("Movimiento", hayMovimiento, topicParts[0] + "/" + topicParts[1]);
                     Log.logmqtt.info("Valor hayMovimiento " + hayMovimiento + " almacenado");
                     Log.logdb.info("Valor de movimiento almacenado en la base de datos");
-                    estadoAnteriorPresencia = hayMovimiento;
+                    Util.ESTADO_ANTERIOR_PRESENCIA = hayMovimiento;
                     // si hay movimiento y la alarma está activada, hacer que suene
-                    if (hayMovimiento == 1 && estadoAlarma) {
+                    if (hayMovimiento == 1 && Util.ESTADO_ALARMA) {
                         try {
                             //tiempo para desactivar la alarma en caso de 
                             // que sea el usuario quien se haya movido
                             Thread.sleep(30000);
-                            MQTTPublisher.publish(broker, TOPIC_ALARMA_SONAR, "true");
-                            estadoAnteriorAlarma = true;
+                            MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_SONAR, "true");
+                            Util.ESTADO_ANTERIOR_ALARMA = true;
                             Log.logmqtt.info("Alarma sonando por detección de movimiento");
                         } catch (Exception e) {
                             Log.log.warn("Error al activar sonido de alarma: {}", e.getMessage());
@@ -158,6 +152,7 @@ public class MQTTSubscriber implements MqttCallback {
             case "Ventana":
                 if (topicParts.length > 3 && topicParts[3].equals("Servo")) {
                     boolean estadoVentana = Boolean.parseBoolean(payload);
+                    Util.ESTADO_VENTANA = estadoVentana; 
                     Log.logmqtt.info("Estado de ventana actualizado ", estadoVentana);
                 }
                 break;
@@ -166,13 +161,13 @@ public class MQTTSubscriber implements MqttCallback {
                 if (topicParts.length > 3) {
                     switch (topicParts[3]) {
                         case "Activada":
-                            estadoAlarma = Boolean.parseBoolean(payload);
-                            Log.logmqtt.info("Estado de alarma actualizado: {}", estadoAlarma);
+                            Util.ESTADO_ALARMA = Boolean.parseBoolean(payload);
+                            Log.logmqtt.info("Estado de alarma actualizado: {}", Util.ESTADO_ALARMA);
                             //Si se desactiva y antes estaba activada
-                            if (!estadoAlarma && estadoAnteriorAlarma) {
+                            if (!Util.ESTADO_ALARMA && Util.ESTADO_ANTERIOR_ALARMA) {
                                 try {
-                                    MQTTPublisher.publish(broker, TOPIC_ALARMA_SONAR, "false");
-                                    estadoAnteriorAlarma = false;
+                                    MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_SONAR, "false");
+                                    Util.ESTADO_ANTERIOR_ALARMA = false;
                                     Log.logmqtt.info("Sonido de alarma detenido "
                                             + "por desactivación");
                                 } catch (Exception e) {
@@ -189,18 +184,17 @@ public class MQTTSubscriber implements MqttCallback {
             case "Ventilacion": 
                 switch (topicParts[3]) {
                     case "Activado": 
-                        estadoVentilacion = Boolean.parseBoolean(payload); 
+                        Util.ESTADO_VENTILACION = Boolean.parseBoolean(payload); 
                         Log.logmqtt.info("Estado de ventilación actualizado: "
-                                + "{}", estadoVentilacion);
+                                + "{}", Util.ESTADO_VENTILACION);
                         break; 
                     case "Modo": 
-                        modoVentilacion = Boolean.parseBoolean(payload); 
+                        Util.MODO_VENTILACION = Boolean.parseBoolean(payload); 
                         Log.logmqtt.info("Modo de ventilación actualizado: "
-                                + "{}", modoVentilacion); 
+                                + "{}", Util.MODO_VENTILACION); 
                 }
                 break; 
                 
-
             default:
                 Log.logmqtt.warn("Sensor no reconocido");
         }

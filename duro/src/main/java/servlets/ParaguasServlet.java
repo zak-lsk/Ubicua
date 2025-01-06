@@ -9,6 +9,7 @@ import java.io.IOException;
 import MQTT.MQTTPublisher;
 import MQTT.MQTTBroker;
 import Logic.Log;
+import Logic.Util; 
 
 /**
  *
@@ -17,7 +18,7 @@ import Logic.Log;
 @WebServlet("/paraguas")
 public class ParaguasServlet extends HttpServlet {
 
-    private static final String TOPIC = "Casa/Entrada/Paraguas/Servo";
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -32,15 +33,15 @@ public class ParaguasServlet extends HttpServlet {
             switch (accion) {
 
                 case "abrir":
-                    MQTTPublisher.publish(broker, TOPIC, "true");
+                    MQTTPublisher.publish(broker, Util.TOPIC_PARAGUAS, "true");
                     Log.logmqtt.info("Se ha actualizado el valor true "
-                            + "en el topic {}", TOPIC);
+                            + "en el topic {}", Util.TOPIC_PARAGUAS);
                     break;
 
                 case "cerrar":
-                    MQTTPublisher.publish(broker, TOPIC, "false");
+                    MQTTPublisher.publish(broker, Util.TOPIC_PARAGUAS, "false");
                     Log.logmqtt.info("Se ha actualizado el valor false "
-                            + "en el topic {}", TOPIC);
+                            + "en el topic {}", Util.TOPIC_PARAGUAS);
                     break;
 
                 default:

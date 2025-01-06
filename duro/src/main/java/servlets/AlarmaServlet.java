@@ -9,6 +9,7 @@ import java.io.IOException;
 import MQTT.MQTTPublisher;
 import MQTT.MQTTBroker;
 import Logic.Log;
+import Logic.Util; 
 
 /**
  *
@@ -17,7 +18,6 @@ import Logic.Log;
 @WebServlet("/alarma")
 public class AlarmaServlet extends HttpServlet {
 
-    private static final String TOPIC = "Casa/Salon/Alarma/Activada";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,15 +29,15 @@ public class AlarmaServlet extends HttpServlet {
         try {
             switch (accion) {
                 case "activar":
-                    MQTTPublisher.publish(broker, TOPIC, "true");
+                    MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_ACTIVAR, "true");
                     Log.logmqtt.info("Se ha actualizado el valor "
-                            + "true en el topic {}", TOPIC);
+                            + "true en el topic {}", Util.TOPIC_ALARMA_ACTIVAR);
                     break;
 
                 case "desactivar":
-                    MQTTPublisher.publish(broker, TOPIC, "false");
+                    MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_ACTIVAR, "false");
                     Log.logmqtt.info("Se ha actualizado el valor false "
-                            + "en el topic {}", TOPIC);
+                            + "en el topic {}", Util.TOPIC_ALARMA_ACTIVAR);
                     break;
 
                 default:

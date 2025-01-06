@@ -9,6 +9,7 @@ import java.io.IOException;
 import MQTT.MQTTPublisher;
 import MQTT.MQTTBroker;
 import Logic.Log;
+import Logic.Util;
 
 /**
  *
@@ -17,7 +18,7 @@ import Logic.Log;
 @WebServlet("/ventana")
 public class VentanaServlet extends HttpServlet {
 
-    private static final String TOPIC = "Casa/Salon/Ventana/Servo";
+    
     private static String estadoVentana = "cerrar"; // Estado inicial de la ventana
 
     @Override
@@ -37,8 +38,8 @@ public class VentanaServlet extends HttpServlet {
             if (!accion.equals(estadoVentana)) {
                 // Publica solo si el estado es diferente
                 String valor = accion.equals("abrir") ? "true" : "false";
-                MQTTPublisher.publish(broker, TOPIC, valor);
-                Log.logmqtt.info("Se ha publicado valor {} en el topic {}", valor, TOPIC);
+                MQTTPublisher.publish(broker, Util.TOPIC_VENTANA, valor);
+                Log.logmqtt.info("Se ha publicado valor {} en el topic {}", valor, Util.TOPIC_VENTANA);
                 
                 // Actualiza el estado actual de la ventana
                 estadoVentana = accion;

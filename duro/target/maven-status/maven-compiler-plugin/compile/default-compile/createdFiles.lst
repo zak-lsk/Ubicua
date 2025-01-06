@@ -11,10 +11,10 @@ db\Topics.class
 Logic\Logic.class
 Logic\Movimiento.class
 servlets\VentanaServlet.class
+Logic\Util.class
 Logic\Inteligencia.class
 Logic\Log.class
 Logic\WeatherAPI.class
-MQTT\MQTTSubscriber.class
 Logic\Temperatura.class
 Logic\PronosticoIntervalo.class
 servlets\GestionarParaguas.class
@@ -24,6 +24,7 @@ com\mycompany\duro\resources\JakartaEE10Resource.class
 servlets\AlarmaServlet.class
 Logic\Gas.class
 Logic\Projectinitializer.class
+MQTT\MQTTSuscriber.class
 servlets\TemperaturaServlet.class
 db\ConectionDDBB.class
 Logic\LocalDateTimeAdapter.class

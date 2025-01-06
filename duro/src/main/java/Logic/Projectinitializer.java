@@ -8,7 +8,8 @@ import java.io.File;
 
 import MQTT.MQTTBroker;
 import MQTT.MQTTPublisher;
-import MQTT.MQTTSubscriber;
+import MQTT.MQTTSuscriber;
+import Logic.Util; 
 
 @WebListener
 public class Projectinitializer implements ServletContextListener {
@@ -34,9 +35,9 @@ public class Projectinitializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         Log.log.info("-->Suscribe Topics<--");
         MQTTBroker broker = new MQTTBroker();
-        MQTTSubscriber suscriber = new MQTTSubscriber();
+        MQTTSuscriber suscriber = new MQTTSuscriber();
         suscriber.suscribeTopic(broker, "Casa/#");
-        MQTTPublisher.publish(broker, "Casa/Test", "Hello from Tomcat :)");
+        MQTTPublisher.publish(broker, Util.TOPIC_TEST, "Hello from Tomcat :)");
         
         //Despues de 5 segundos publicar un mensaje de prueba
         try {
@@ -44,7 +45,7 @@ public class Projectinitializer implements ServletContextListener {
         } catch (InterruptedException ex) {
             System.out.println(ex);
         }
-        MQTTPublisher.publish(broker, "Casa/Test", "Hola de nuevo (5segundos después)");
+        MQTTPublisher.publish(broker, Util.TOPIC_TEST, "Hola de nuevo (5segundos después)");
     }
 
     
