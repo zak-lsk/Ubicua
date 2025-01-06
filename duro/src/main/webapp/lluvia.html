@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISDOGAR - Paraguas</title>
+    <title>SISDOGAR - Lluvia</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div class="ventana">
-        <h2>Gestión del Paraguas</h2>
+        <h2>Lluvia</h2>
         <div class="contenido">
             <!-- Estado del paraguas -->
             <div id="estadoParaguas">
@@ -16,29 +16,27 @@
                 <p id="paraguasTexto">Cargando estado del paraguas...</p>
             </div>
 
-            <!-- Botones para forzar acciones -->
+            <!-- Botones de acción -->
             <div id="botones">
+                <button onclick="enviarAccionVentana('abrir')">Abrir Ventanas</button>
+                <button onclick="enviarAccionVentana('cerrar')">Cerrar Ventanas</button>
                 <button onclick="enviarAccionParaguas('abrir')">Abrir Paraguas</button>
                 <button onclick="enviarAccionParaguas('cerrar')">Cerrar Paraguas</button>
-                <button onclick="actualizarEstadoParaguas()">Actualizar Estado</button>
                 <button onclick="location.href='index.html'">Volver</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Actualizar estado del paraguas llamando al servlet
         function actualizarEstadoParaguas() {
             fetch('GestionarParaguas', { method: 'POST' })
                 .then(response => {
-                    console.log('Respuesta del servidor:', response); // Log de respuesta
                     if (!response.ok) {
                         throw new Error('Error al obtener el estado del paraguas');
                     }
                     return response.text();
                 })
                 .then(data => {
-                    console.log('Datos recibidos:', data); // Log de datos
                     document.getElementById('paraguasTexto').textContent = data;
                 })
                 .catch(error => {
@@ -47,7 +45,23 @@
                 });
         }
 
-        // Función para forzar acciones (abrir/cerrar paraguas)
+        function enviarAccionVentana(accion) {
+            fetch('ventana', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'accion=' + accion
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la petición');
+                }
+                console.log('Acción ventana enviada correctamente');
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
         function enviarAccionParaguas(accion) {
             fetch('paraguas', {
                 method: 'POST',
@@ -61,13 +75,18 @@
                     throw new Error('Error en la petición');
                 }
                 console.log('Acción paraguas enviada correctamente');
-                actualizarEstadoParaguas(); // Actualizar estado tras la acción
             })
             .catch(error => console.error('Error:', error));
         }
 
-        // Llamar automáticamente al cargar la página
+        // Actualización periódica
+        setInterval(() => {
+            actualizarEstadoParaguas();
+        }, 5000);
+
+        // Inicializar al cargar la página
         actualizarEstadoParaguas();
     </script>
 </body>
 </html>
+

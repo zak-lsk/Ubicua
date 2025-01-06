@@ -88,4 +88,14 @@
         <servlet-name>InteligenciaTemperatura</servlet-name>
         <url-pattern>/InteligenciaTemperatura</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GestionarParaguas</servlet-name>
+        <servlet-class>servlets.GestionarParaguas</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GestionarParaguas</servlet-name>
+        <url-pattern>/GestionarParaguas</url-pattern>
+    </servlet-mapping>
 </web-app>
