@@ -15,6 +15,14 @@
                 <button onclick="location.href = 'index.html'">Volver</button>
             </div>
             <div id="estado-alarma"></div>
+            <div id="modal-alerta" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; justify-content: center; align-items: center;">
+                <div style="background-color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                    <h2>¡Alerta detectada!</h2>
+                    <p>¿Eres tú quien está en casa?</p>
+                    <button id="soy-yo" style="margin-right: 10px; padding: 10px 20px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer;">Soy yo</button>
+                    <button id="no-soy-yo" style="padding: 10px 20px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;">No soy yo</button>
+                </div>
+            </div>
         </div>
         <script>
             function enviarAccionAlarma(accion) {
@@ -38,7 +46,49 @@
                         estadoAlarma.style.color = accion === 'activar' ? 'green' : 'red'; // Cambiar color según acción
                     })
                     .catch(error => console.error('Error:', error));
-                    }
+            }
+
+            function comprobarValores() {
+                fetch('VerificarMovimientoAlarma')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al obtener los datos');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const modal = document.getElementById('modal-alerta');
+                        if (data.alerta) {
+                            // Mostrar el modal si hay alerta
+                            modal.style.display = 'flex';
+                        } else {
+                            // Ocultar el modal si no hay alerta
+                            modal.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al comprobar valores:', error);
+                    });
+            }
+
+            // Configurar los botones del modal
+            document.getElementById('soy-yo').addEventListener('click', () => {
+                enviarAccionAlarma("desactivar");
+                alert('Confirmado que eres tú. La alerta se desactiva.');
+                document.getElementById('modal-alerta').style.display = 'none';
+            });
+
+            document.getElementById('no-soy-yo').addEventListener('click', () => {
+                enviarAccionAlarma("sonar");
+                alert('La alerta continúa activa. Se tomarán medidas.');
+                document.getElementById('modal-alerta').style.display = 'none';
+            });
+
+            // Ejecutar la comprobación cada 1 segundo
+            setInterval(comprobarValores, 1000);
+
+            // Ejecutar la comprobación al cargar la página
+            comprobarValores();
         </script>
     </body>
 </html>

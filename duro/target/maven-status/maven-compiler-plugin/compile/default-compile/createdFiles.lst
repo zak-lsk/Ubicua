@@ -28,4 +28,5 @@ MQTT\MQTTSuscriber.class
 servlets\TemperaturaServlet.class
 db\ConectionDDBB.class
 Logic\LocalDateTimeAdapter.class
+servlets\VerificarMovimientoAlarma.class
 servlets\InteligenciaTemperatura.class
