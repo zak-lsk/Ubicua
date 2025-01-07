@@ -35,12 +35,12 @@ public class AlarmaServlet extends HttpServlet {
                 case "activar":
                     MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_ACTIVAR, "true");
                     Log.logmqtt.info("Se ha actualizado el valor 'true' en el topic {}", Util.TOPIC_ALARMA_ACTIVAR);
-                    response.getWriter().write("{\"mensaje\": \"Alarma activada\"}");
+                    response.getWriter().println("{\"mensaje\": \"Alarma activada\"}");
                     break;
 
                 case "desactivar":
                     Inteligencia.desactivarAlarma();
-                    response.getWriter().write("{\"mensaje\": \"Alarma desactivada\"}");
+                    response.getWriter().println("{\"mensaje\": \"Alarma desactivada\"}");
                     break;
 
                 case "sonar":

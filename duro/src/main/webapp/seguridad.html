@@ -14,8 +14,8 @@
                 <button onclick="enviarAccionAlarma('desactivar')">Desactivar Alarma</button>
                 <button onclick="location.href = 'index.html'">Volver</button>
             </div>
+            <div id="estado-alarma"></div>
         </div>
-
         <script>
             function enviarAccionAlarma(accion) {
                 fetch('alarma', {
@@ -25,14 +25,20 @@
                     },
                     body: 'accion=' + accion
                 })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Error en la petición');
-                            }
-                            console.log('Acción de alarma enviada correctamente');
-                        })
-                        .catch(error => console.error('Error:', error));
-            }
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la petición');
+                        }
+                        return response.json(); // Procesar la respuesta como JSON
+                    })
+                    .then(data => {
+                        // Mostrar el mensaje en el elemento con id "estado-alarma"
+                        const estadoAlarma = document.getElementById('estado-alarma');
+                        estadoAlarma.textContent = data.mensaje; // Mostrar el mensaje de activación/desactivación
+                        estadoAlarma.style.color = accion === 'activar' ? 'green' : 'red'; // Cambiar color según acción
+                    })
+                    .catch(error => console.error('Error:', error));
+                    }
         </script>
     </body>
 </html>
