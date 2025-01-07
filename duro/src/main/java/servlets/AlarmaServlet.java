@@ -27,9 +27,9 @@ public class AlarmaServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        String accion = request.getParameter("accion");
+        String accion = request.getParameter("accion"); // Recoger la acción asociada
         MQTTBroker broker = new MQTTBroker();
-
+        Log.log.info("Acción recibida de alarma: " + accion);
         try {
             switch (accion) {
                 case "activar":
@@ -47,12 +47,6 @@ public class AlarmaServlet extends HttpServlet {
                     Inteligencia.sonarAlarma();
                     response.getWriter().write("{\"mensaje\": \"Alarma sonando\"}");
                     break;
-
-                case "verificar":
-                    String estadoAlarma = Inteligencia.gestionarAlarma();
-                    response.getWriter().write(estadoAlarma);
-                    break;
-
                 default:
                     response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                     response.getWriter().write("{\"error\": \"Acción no válida\"}");
