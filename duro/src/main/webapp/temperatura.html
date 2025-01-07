@@ -31,7 +31,15 @@
                 </div>
             </div>
         </div>
-
+        <div id="modal-alerta" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; justify-content: center; align-items: center;">
+            <div style="background-color: white; padding: 20px; border-radius: 8px; text-align: center;">
+                <h2>¡Alerta detectada!</h2>
+                <p>¿Eres tú quien está en casa?</p>
+                <p><strong>Tiempo restante: <span id="contador">30</span> segundos</strong></p>
+                <button id="soy-yo" style="margin-right: 10px; padding: 10px 20px; background-color: green; color: white; border: none; border-radius: 5px; cursor: pointer;">Soy yo</button>
+                <button id="no-soy-yo" style="padding: 10px 20px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;">No soy yo</button>
+            </div>
+        </div>
         <script>
             setInterval(() => {
                 fetch('/alarma', {
@@ -64,7 +72,11 @@
                     .then(data => {
                         const pronosticoDiv = document.getElementById('pronosticoData');
                         pronosticoDiv.innerHTML = '';
-                        data.forEach((intervalo) => {
+                        
+                        // Mostrar solo los primeros 10 pronósticos
+                        const pronosticosLimitados = data.slice(0, 30);
+
+                        pronosticosLimitados.forEach((intervalo) => {
                             const item = document.createElement('div');
                             item.innerHTML = `
                                 <p>
@@ -110,6 +122,88 @@
             actualizarTemperatura();
             actualizarPronostico();
             actualizarAccionSugerida();
+        
+            // Alarma
+
+            let contadorInterval; // Variable global para controlar el intervalo del contador
+            let modalActivo = false; // Variable para evitar que el modal se abra repetidamente
+
+            function iniciarContador() {
+                const contador = document.getElementById('contador'); // Seleccionamos el contador
+                if (!contador) {
+                    console.error('Elemento del contador no encontrado');
+                    return;
+                }
+
+                let tiempoRestante = 30; // Tiempo inicial en segundos
+
+                contador.textContent = tiempoRestante; // Mostrar tiempo inicial en el HTML
+
+                // Limpia cualquier intervalo previo
+                if (contadorInterval) {
+                    clearInterval(contadorInterval);
+                }
+
+                // Crear un nuevo intervalo
+                contadorInterval = setInterval(() => {
+                    tiempoRestante -= 1; // Reducir el tiempo restante
+                    contador.textContent = tiempoRestante; // Actualizar el contador en el HTML
+
+                    if (tiempoRestante <= 0) {
+                        clearInterval(contadorInterval); // Detener el contador
+                        alert('La alerta continúa activa. Llamando a la policía.');
+                        document.getElementById('modal-alerta').style.display = 'none'; // Cerrar modal
+                    }
+                }, 1000);
+            }
+
+            function cerrarModal() {
+                modalActivo = false; // Marcar el modal como inactivo
+                document.getElementById('modal-alerta').style.display = 'none'; // Cerrar el modal
+                detenerContador(); // Detener el contador
+            }
+
+            function detenerContador() {
+                clearInterval(contadorInterval); // Detener cualquier intervalo activo
+            }
+
+            function comprobarValores() {
+                fetch('VerificarMovimientoAlarma')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error al obtener los datos');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const modal = document.getElementById('modal-alerta');
+                        if (data.alerta && !modalActivo) { // Solo abre el modal si hay alerta y no está activo
+                            modalActivo = true; // Marcar el modal como activo
+                            modal.style.display = 'flex'; // Mostrar el modal
+                            iniciarContador(); // Iniciar el contador cuando se muestra el modal
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al comprobar valores:', error);
+                    });
+            }
+
+            // Configurar los botones del modal
+            document.getElementById('soy-yo').addEventListener('click', () => {
+                cerrarModal(); // Detener el contador
+                alert('Confirmado que eres tú. La alerta se desactiva.');
+            });
+
+            document.getElementById('no-soy-yo').addEventListener('click', () => {
+                cerrarModal(); // Detener el contador
+                alert('La alerta continúa activa. Llamando a la policía.');
+            });
+
+            // Ejecutar la comprobación cada 1 segundo
+            setInterval(comprobarValores, 1000);
+
+            // Ejecutar la comprobación al cargar la página
+            comprobarValores();
         </script>
         <script src="js/app.js"></script>
     </body>

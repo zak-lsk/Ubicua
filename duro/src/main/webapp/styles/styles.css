@@ -123,3 +123,13 @@ button:hover {
     font-size: 1rem;
     color: #333;
 }
+
+#pronosticoData {
+    max-height: 300px; /* Altura máxima del contenedor */
+    overflow-y: auto; /* Agrega barra de desplazamiento vertical */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
