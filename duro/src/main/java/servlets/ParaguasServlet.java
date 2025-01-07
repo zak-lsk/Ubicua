@@ -36,12 +36,14 @@ public class ParaguasServlet extends HttpServlet {
                     MQTTPublisher.publish(broker, Util.TOPIC_PARAGUAS, "true");
                     Log.logmqtt.info("Se ha actualizado el valor true "
                             + "en el topic {}", Util.TOPIC_PARAGUAS);
+                    Util.ESTADO_PARAGUAS = true;
                     break;
 
                 case "cerrar":
                     MQTTPublisher.publish(broker, Util.TOPIC_PARAGUAS, "false");
                     Log.logmqtt.info("Se ha actualizado el valor false "
                             + "en el topic {}", Util.TOPIC_PARAGUAS);
+                    Util.ESTADO_PARAGUAS = false;
                     break;
 
                 default:

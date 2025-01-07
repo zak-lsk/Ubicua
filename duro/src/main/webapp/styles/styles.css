@@ -1,0 +1,125 @@
+/* styles.css */
+
+/* Estilo global */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+/* Contenedor principal */
+.ventana, .menu {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+}
+
+/* Títulos */
+h1, h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #555;
+    margin-bottom: 10px;
+}
+
+/* Botones */
+button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Estado del paraguas y alarma */
+#estadoParaguas, #estado-alarma {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Modal de alerta */
+#modal-alerta {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-alerta div {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#modal-alerta h2 {
+    color: #d9534f;
+    margin-bottom: 15px;
+}
+
+#modal-alerta button {
+    display: inline-block;
+    width: auto;
+    margin: 5px;
+    padding: 10px 20px;
+}
+
+#modal-alerta button#soy-yo {
+    background-color: #5cb85c;
+}
+
+#modal-alerta button#no-soy-yo {
+    background-color: #d9534f;
+}
+
+/* Pronóstico */
+#pronostico {
+    margin-top: 20px;
+}
+
+#pronostico p {
+    margin: 5px 0;
+    color: #333;
+}
+
+/* Acción sugerida */
+#accionSugerida {
+    margin-top: 20px;
+}
+
+#accionSugerida p {
+    font-size: 1rem;
+    color: #333;
+}

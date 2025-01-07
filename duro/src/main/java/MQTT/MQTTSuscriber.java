@@ -133,19 +133,6 @@ public class MQTTSuscriber implements MqttCallback {
                     Log.logmqtt.info("Valor hayMovimiento " + hayMovimiento + " almacenado");
                     Log.logdb.info("Valor de movimiento almacenado en la base de datos");
                     Util.ESTADO_ANTERIOR_PRESENCIA = hayMovimiento;
-                    // si hay movimiento y la alarma está activada, hacer que suene
-                    if (hayMovimiento == 1 && Util.ESTADO_ALARMA) {
-                        try {
-                            //tiempo para desactivar la alarma en caso de 
-                            // que sea el usuario quien se haya movido
-                            Thread.sleep(30000);
-                            MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_SONAR, "true");
-                            Util.ESTADO_ANTERIOR_ALARMA = true;
-                            Log.logmqtt.info("Alarma sonando por detección de movimiento");
-                        } catch (Exception e) {
-                            Log.log.warn("Error al activar sonido de alarma: {}", e.getMessage());
-                        }
-                    }
                 }
 
                 break;
