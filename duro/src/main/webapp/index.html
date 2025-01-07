@@ -26,6 +26,29 @@
         
         // Alarma
         
+        function enviarAccionAlarma(accion) {
+            fetch('alarma', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'accion=' + accion
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la petición');
+                    }
+                    return response.json(); // Procesar la respuesta como JSON
+                })
+                .then(data => {
+                    // Mostrar el mensaje en el elemento con id "estado-alarma"
+                    const estadoAlarma = document.getElementById('estado-alarma');
+                    estadoAlarma.textContent = data.mensaje; // Mostrar el mensaje de activación/desactivación
+                    estadoAlarma.style.color = accion === 'activar' ? 'green' : 'red'; // Cambiar color según acción
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
         let contadorInterval; // Variable global para controlar el intervalo del contador
         let modalActivo = false; // Variable para evitar que el modal se abra repetidamente
 
@@ -52,7 +75,8 @@
 
                 if (tiempoRestante <= 0) {
                     clearInterval(contadorInterval); // Detener el contador
-                    alert('La alerta continúa activa. Llamando a la policía.');
+                    enviarAccionAlarma("sonar"); // Acción cuando el tiempo llega a 0
+                    alert('La alerta continúa activa. Llamando a policía.');
                     document.getElementById('modal-alerta').style.display = 'none'; // Cerrar modal
                 }
             }, 1000);
@@ -63,7 +87,6 @@
             document.getElementById('modal-alerta').style.display = 'none'; // Cerrar el modal
             detenerContador(); // Detener el contador
         }
-
         function detenerContador() {
             clearInterval(contadorInterval); // Detener cualquier intervalo activo
         }
@@ -92,12 +115,16 @@
         // Configurar los botones del modal
         document.getElementById('soy-yo').addEventListener('click', () => {
             cerrarModal(); // Detener el contador
+            document.getElementById('modal-alerta').style.display = 'none'; // Cerrar modal
+            enviarAccionAlarma("desactivar"); // Acción para desactivar la alarma
             alert('Confirmado que eres tú. La alerta se desactiva.');
         });
 
         document.getElementById('no-soy-yo').addEventListener('click', () => {
             cerrarModal(); // Detener el contador
-            alert('La alerta continúa activa. Llamando a la policía.');
+            document.getElementById('modal-alerta').style.display = 'none'; // Cerrar modal
+            enviarAccionAlarma("sonar"); // Acción para sonar la alarma
+            alert('La alerta continúa activa. Llamando a policía.');
         });
 
         // Ejecutar la comprobación cada 1 segundo
