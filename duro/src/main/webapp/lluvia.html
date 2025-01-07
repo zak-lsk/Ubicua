@@ -5,22 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SISDOGAR - Lluvia</title>
     <link rel="stylesheet" href="css/styles.css">
-    <script>
-    function verificarEstadoAlarma() {
-        fetch("/alarmaModal", { method: "GET" })
-            .then(response => response.json())
-            .then(data => {
-                if (data.alarmaActivada && data.movimientoDetectado) {
-                    console.log("Movimiento detectado. Redirigiendo a la página de seguridad...");
-                    window.location.href = "/seguridad.html"; // Redirige a la página de seguridad
-                }
-            })
-            .catch(error => console.error("Error al verificar el estado de la alarma:", error));
-    }
-
-    // Verifica el estado cada 5 segundos
-    setInterval(verificarEstadoAlarma, 5000);
-  </script>
 </head>
 <body>
     <div class="ventana">
@@ -31,7 +15,6 @@
                 <h3>Estado del Paraguas</h3>
                 <p id="paraguasTexto">Cargando estado del paraguas...</p>
             </div>
-
             <!-- Botones de acción -->
             <div id="botones">
                 <button onclick="enviarAccionVentana('abrir')">Abrir Ventanas</button>
@@ -42,8 +25,23 @@
             </div>
         </div>
     </div>
-
     <script>
+        setInterval(() => {
+            fetch('/alarma', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'accion=verificar'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.alarmaActivada && data.movimientoDetectado) {
+                    // Redirigir a la página de seguridad
+                    window.location.href = '/seguridad.html';
+                }
+            })
+            .catch(error => console.error('Error al verificar el estado de la alarma:', error));
+        }, 5000); // Se verifica cada 5 segundos
+        
         function actualizarEstadoParaguas() {
             fetch('GestionarParaguas', { method: 'POST' })
                 .then(response => {

@@ -19,8 +19,8 @@ C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cu
 C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\MQTT\MQTTBroker.java
 C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\MQTT\MQTTPublisher.java
 C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\MQTT\MQTTSuscriber.java
-C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\ActivarAlarmaServlet.java
 C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\AlarmaServlet.java
+C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\GestionarAlarmaServlet.java
 C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\GestionarParaguas.java
 C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\InteligenciaTemperatura.java
 C:\Users\Pablo\OneDrive - Universidad de Alcala\Escritorio\UAH\4 año GII\1er cuatrimestre\Computación Ubicua\Laboratorio\Sisdogar\Ubicua\duro\src\main\java\servlets\ParaguasServlet.java

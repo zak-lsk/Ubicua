@@ -1,5 +1,6 @@
 package servlets;
 
+import Logic.Inteligencia;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,6 +24,9 @@ public class AlarmaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
         String accion = request.getParameter("accion");
         MQTTBroker broker = new MQTTBroker();
 
@@ -30,21 +34,33 @@ public class AlarmaServlet extends HttpServlet {
             switch (accion) {
                 case "activar":
                     MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_ACTIVAR, "true");
-                    Log.logmqtt.info("Se ha actualizado el valor "
-                            + "true en el topic {}", Util.TOPIC_ALARMA_ACTIVAR);
+                    Log.logmqtt.info("Se ha actualizado el valor 'true' en el topic {}", Util.TOPIC_ALARMA_ACTIVAR);
+                    response.getWriter().write("{\"mensaje\": \"Alarma activada\"}");
                     break;
 
                 case "desactivar":
-                    MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_ACTIVAR, "false");
-                    Log.logmqtt.info("Se ha actualizado el valor false "
-                            + "en el topic {}", Util.TOPIC_ALARMA_ACTIVAR);
+                    Inteligencia.desactivarAlarma();
+                    response.getWriter().write("{\"mensaje\": \"Alarma desactivada\"}");
+                    break;
+
+                case "sonar":
+                    Inteligencia.sonarAlarma();
+                    response.getWriter().write("{\"mensaje\": \"Alarma sonando\"}");
+                    break;
+
+                case "verificar":
+                    String estadoAlarma = Inteligencia.gestionarAlarma();
+                    response.getWriter().write(estadoAlarma);
                     break;
 
                 default:
-                    Log.logmqtt.warn("Acción de alarma no válida: {}", accion);
+                    response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                    response.getWriter().write("{\"error\": \"Acción no válida\"}");
             }
         } catch (Exception e) {
-            Log.log.error("Error al cambiar estado de la alarma: {}", e.getMessage(), e);
+            Log.log.error("Error en el servlet de alarma: " + e.getMessage(), e);
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            response.getWriter().write("{\"error\": \"Error en el servidor\"}");
         }
     }
 }
