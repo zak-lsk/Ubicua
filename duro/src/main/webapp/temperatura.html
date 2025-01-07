@@ -14,8 +14,10 @@
                 
                 <!-- Botones para encender/apagar y volver -->
                 <div id="botones">
-                    <button onclick="enviarAccion('temperatura', 'encender')">Encender</button>
-                    <button onclick="enviarAccion('temperatura', 'apagar')">Apagar</button>
+                    <button onclick="enviarAccion('aire', 'encender')">Encender Aire Acondicionado</button>
+                    <button onclick="enviarAccion('aire', 'apagar')">Apagar Aire Acondicionado</button>
+                    <button onclick="enviarAccion('calefaccion', 'encender')">Encender Calefacción</button>
+                    <button onclick="enviarAccion('calefaccion', 'apagar')">Apagar Calefacción</button>
                     <button onclick="location.href = 'index.html'">Volver</button>
                 </div>
                 
@@ -41,6 +43,24 @@
             </div>
         </div>
         <script>
+            
+            function enviarAccion(dispositivo, accion) {
+                fetch('temperatura', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `dispositivo=${dispositivo}&accion=${accion}`
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Error en la petición');
+                        }
+                        console.log(`${dispositivo} ${accion} correctamente`);
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+            
             setInterval(() => {
                 fetch('/alarma', {
                     method: 'POST',
