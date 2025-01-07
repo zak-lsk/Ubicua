@@ -546,7 +546,8 @@ public class Inteligencia {
             Util.ESTADO_ALARMA = false;
             MQTTBroker broker = new MQTTBroker();
             MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_ACTIVAR, "false");
-            Log.logmqtt.info("Alarma desactivada.");
+            MQTTPublisher.publish(broker, Util.TOPIC_ALARMA_SONAR, "false");
+            Log.logmqtt.info("Alarma desactivada y sin sonar.");
         } catch (Exception e) {
             Log.log.error("Error al desactivar la alarma: " + e.getMessage());
         }
