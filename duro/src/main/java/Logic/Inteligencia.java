@@ -471,7 +471,7 @@ public class Inteligencia {
                         return "Paraguas ya está abierto debido a lluvia.";
                     }
                 } else {
-                    if (Util.MODO_VENTILACION) {
+                    if (Util.ESTADO_PARAGUAS) {
                         cerrarParaguas(broker);
                         return "Paraguas cerrado debido a condiciones favorables.";
                     } else {
@@ -483,7 +483,7 @@ public class Inteligencia {
                 // El usuario no está en casa, cerrar el paraguas si está abierto
                 Log.log.info("El usuario no esta en casa o no se espera "
                         + "que vaya a salir pronto");
-                if (Util.MODO_VENTILACION) {
+                if (Util.ESTADO_PARAGUAS) {
                     cerrarParaguas(broker);
                     return "Paraguas cerrado porque el usuario ya no está en casa.";
                 } else {
