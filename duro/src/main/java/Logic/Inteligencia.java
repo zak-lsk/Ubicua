@@ -502,7 +502,7 @@ public class Inteligencia {
      */
     private static void abrirParaguas(MQTTBroker broker) {
         MQTTPublisher.publish(broker, Util.TOPIC_PARAGUAS, "true");
-        Util.MODO_VENTILACION = true;
+        Util.ESTADO_PARAGUAS = true;
         Log.log.info("Paraguas abierto correctamente.");
     }
 
@@ -513,7 +513,7 @@ public class Inteligencia {
      */
     private static void cerrarParaguas(MQTTBroker broker) {
         MQTTPublisher.publish(broker, Util.TOPIC_PARAGUAS, "false");
-        Util.MODO_VENTILACION = false;
+        Util.ESTADO_PARAGUAS = false;
         Log.log.info("Paraguas cerrado correctamente.");
     }
 
